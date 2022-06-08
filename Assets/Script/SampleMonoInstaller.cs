@@ -1,6 +1,9 @@
+#region
+
 using Script;
-using UnityEngine;
 using Zenject;
+
+#endregion
 
 public class SampleMonoInstaller : MonoInstaller
 {
@@ -8,7 +11,8 @@ public class SampleMonoInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.BindInterfacesTo<CharacterController_CSharp>().AsSingle();
+        Container.Bind<ICharacter>().To<CharacterController_CSharp>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle();
         Container.Bind<IInputSystem>().To<InputSystemManagerCsharp>().AsSingle();
         Container.Bind<ITimeSystem>().To<TimeSystem>().AsSingle();
     }
