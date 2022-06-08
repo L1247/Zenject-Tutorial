@@ -1,0 +1,23 @@
+{
+    "name": "SampleTests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:a2f2239355369ba4fb6909aeaa41def5",
+        "GUID:0acc523941302664db1f4e527237feb3",
+        "GUID:9ce70cf95ffdfd64892d39ffa5fcf349"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "NSubstitute.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
