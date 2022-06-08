@@ -7,7 +7,18 @@ using Zenject;
 
 namespace Script
 {
-    public class CharacterController_CSharp
+    public interface IMove
+    {
+    #region Public Methods
+
+        void HorizontalMove(int horizontalValue);
+
+    #endregion
+    }
+
+    public interface ICharacter : IMove { }
+
+    public class CharacterController_CSharp : ICharacter
     {
     #region Private Variables
 

@@ -48,7 +48,6 @@ namespace Tests
             base.Setup();
 
             Container.Bind<Transform>().WithId(transformId).FromNewComponentOnNewGameObject().AsSingle();
-            Container.Bind<IInputSystem>().FromSubstitute().AsSingle();
             Container.Bind<ITimeSystem>().FromSubstitute().AsSingle();
             Container.Bind<CharacterController_CSharp>().AsSingle();
 

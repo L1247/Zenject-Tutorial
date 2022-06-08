@@ -11,7 +11,7 @@ namespace Script
     #region Private Variables
 
         [Inject]
-        private CharacterController_CSharp characterController;
+        private ICharacter characterController;
 
         [Inject]
         private IInputSystem inputSystemManager;
