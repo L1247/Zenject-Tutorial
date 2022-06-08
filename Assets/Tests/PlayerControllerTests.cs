@@ -22,13 +22,13 @@ namespace Tests
     #region Test Methods
 
         [Test]
-        public void Tick()
+        public void HorizontalMove()
         {
             // arrange // given
             var exceptHorizontalValue = 99;
             inputSystem.GetHorizontalValue().Returns(exceptHorizontalValue);
             // act // when
-            playerController.Tick();
+            playerController.HorizontalMove();
             // assert // then
             character.Received(1).HorizontalMove(exceptHorizontalValue);
         }
@@ -51,5 +51,17 @@ namespace Tests
         }
 
     #endregion
+
+        // [Test]
+        // public void Dash()
+        // {
+        //     // arrange // given
+        //     var exceptHorizontalValue = 99;
+        //     inputSystem.GetHorizontalValue().Returns(exceptHorizontalValue);
+        //     // act // when
+        //     playerController.HorizontalMove();
+        //     // assert // then
+        //     character.Received(1).HorizontalMove(exceptHorizontalValue);
+        // }
     }
 }
