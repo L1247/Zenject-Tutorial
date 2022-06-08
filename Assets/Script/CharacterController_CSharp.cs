@@ -11,6 +11,8 @@ namespace Script
     {
     #region Public Methods
 
+        void DoDash(int horizontalValue , int frame);
+
         void HorizontalMove(int horizontalValue);
 
         void Walk(int horizontalValue);
@@ -61,7 +63,8 @@ namespace Script
 
         public void DoDash(int horizontalValue , int frame)
         {
-            dashFrame           = frame;
+            dashFrame = frame;
+            Debug.Log($"{frame}");
             dashHorizontalValue = horizontalValue;
             CurrentMovingState  = MovingState.Dash;
         }
@@ -85,6 +88,8 @@ namespace Script
 
         public void Walk(int horizontalValue)
         {
+            if (CurrentMovingState == MovingState.Dash)
+                return;
             HorizontalMove(horizontalValue);
             CurrentMovingState = MovingState.Walk;
         }

@@ -1,5 +1,8 @@
+#region
+
 using UnityEngine;
-using Zenject;
+
+#endregion
 
 namespace Script
 {
@@ -8,6 +11,8 @@ namespace Script
     #region Public Methods
 
         int GetHorizontalValue();
+
+        bool IsDashKeyDown();
 
     #endregion
     }
@@ -20,6 +25,11 @@ namespace Script
         {
             // -1 , 0 , 1
             return (int)Input.GetAxisRaw("Horizontal");
+        }
+
+        public bool IsDashKeyDown()
+        {
+            return Input.GetKeyDown(KeyCode.Space);
         }
 
     #endregion

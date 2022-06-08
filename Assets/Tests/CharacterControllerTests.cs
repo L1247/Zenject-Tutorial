@@ -49,7 +49,7 @@ namespace Tests
         }
 
         [Test]
-        public void Dash()
+        public void DoDash()
         {
             // act
             var dashFrame = 5;

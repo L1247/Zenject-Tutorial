@@ -11,7 +11,7 @@ public class SampleMonoInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.Bind<ICharacter>().To<CharacterController_CSharp>().AsSingle();
+        Container.Bind(typeof(ICharacter) , typeof(ITickable)).To<CharacterController_CSharp>().AsSingle();
         Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle();
         Container.Bind<IInputSystem>().To<InputSystemManagerCsharp>().AsSingle();
         Container.Bind<ITimeSystem>().To<TimeSystem>().AsSingle();

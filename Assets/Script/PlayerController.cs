@@ -22,7 +22,10 @@ namespace Script
 
         public void Tick()
         {
-            Walk();
+            if (inputSystemManager.IsDashKeyDown())
+                characterController.DoDash(3 , 10);
+            else
+                Walk();
         }
 
         public void Walk()
