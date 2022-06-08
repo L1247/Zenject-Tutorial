@@ -49,6 +49,19 @@ namespace Tests
         }
 
         [Test]
+        public void Dash()
+        {
+            // act
+            var dashFrame = 5;
+            characterControllerCSharp.DoDash(1 , dashFrame);
+            ShouldMovingStateEqual(MovingState.Dash);
+            TickCharacter(dashFrame);
+            // assert
+            Should_X_Equal(25);
+            ShouldMovingStateEqual(MovingState.None);
+        }
+
+        [Test]
         public void Init()
         {
             ShouldMovingStateEqual(MovingState.None);
@@ -91,6 +104,11 @@ namespace Tests
         {
             Assert.AreEqual(exceptState , characterControllerCSharp.CurrentMovingState ,
                             "MovingState is not equal");
+        }
+
+        private void TickCharacter(int tickFrame)
+        {
+            for (var i = 0 ; i < tickFrame ; i++) characterControllerCSharp.Tick();
         }
 
     #endregion

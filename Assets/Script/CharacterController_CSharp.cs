@@ -25,7 +25,7 @@ namespace Script
         None , Walk , Dash
     }
 
-    public class CharacterController_CSharp : ICharacter
+    public class CharacterController_CSharp : ICharacter , ITickable
     {
     #region Public Variables
 
@@ -43,6 +43,9 @@ namespace Script
         [Inject]
         private ITimeSystem timeSystem;
 
+        private int dashHorizontalValue;
+        private int dashFrame;
+
     #endregion
 
     #region Constructor
@@ -56,11 +59,28 @@ namespace Script
 
     #region Public Methods
 
+        public void DoDash(int horizontalValue , int frame)
+        {
+            dashFrame           = frame;
+            dashHorizontalValue = horizontalValue;
+            CurrentMovingState  = MovingState.Dash;
+        }
+
         public void HorizontalMove(int horizontalValue)
         {
             var deltaTime   = timeSystem.GetDeltaTime();
             var newPosition = Vector3.right * (horizontalValue * deltaTime) * moveSpeed;
             mainCharacter.position += newPosition;
+        }
+
+        public void Tick()
+        {
+            if (CurrentMovingState == MovingState.Dash)
+            {
+                dashFrame -= 1;
+                if (dashFrame == 0) CurrentMovingState = MovingState.None;
+                HorizontalMove(dashHorizontalValue);
+            }
         }
 
         public void Walk(int horizontalValue)

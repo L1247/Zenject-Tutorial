@@ -53,7 +53,7 @@ namespace Tests
     #endregion
 
         // [Test]
-        // public void Dash()
+        // public void DoDash()
         // {
         //     // arrange // given
         //     var exceptHorizontalValue = 99;
