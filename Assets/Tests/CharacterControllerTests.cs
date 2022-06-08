@@ -48,6 +48,12 @@ namespace Tests
             ShouldMovingStateEqual(MovingState.Walk);
         }
 
+        [Test]
+        public void Init()
+        {
+            ShouldMovingStateEqual(MovingState.None);
+        }
+
     #endregion
 
     #region Public Methods
