@@ -22,15 +22,15 @@ namespace Tests
     #region Test Methods
 
         [Test]
-        public void HorizontalMove()
+        public void Walk()
         {
             // arrange // given
             var exceptHorizontalValue = 99;
             inputSystem.GetHorizontalValue().Returns(exceptHorizontalValue);
             // act // when
-            playerController.HorizontalMove();
+            playerController.Walk();
             // assert // then
-            character.Received(1).HorizontalMove(exceptHorizontalValue);
+            character.Received(1).Walk(exceptHorizontalValue);
         }
 
     #endregion
@@ -59,9 +59,9 @@ namespace Tests
         //     var exceptHorizontalValue = 99;
         //     inputSystem.GetHorizontalValue().Returns(exceptHorizontalValue);
         //     // act // when
-        //     playerController.HorizontalMove();
+        //     playerController.Walk();
         //     // assert // then
-        //     character.Received(1).HorizontalMove(exceptHorizontalValue);
+        //     character.Received(1).Walk(exceptHorizontalValue);
         // }
     }
 }

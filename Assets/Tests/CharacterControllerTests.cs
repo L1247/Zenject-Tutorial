@@ -30,13 +30,22 @@ namespace Tests
         public void HorizontalMove(int horizontal , float expectedX)
         {
             // arrange // given
-            GivenDeltaTime(1);
 
             // act // when
             characterControllerCSharp.HorizontalMove(horizontal);
 
             // assert // then
             Should_X_Equal(expectedX);
+        }
+
+        [Test]
+        public void Walk()
+        {
+            // act
+            characterControllerCSharp.Walk(1);
+            // assert
+            Should_X_Equal(5);
+            ShouldMovingStateEqual(MovingState.Walk);
         }
 
     #endregion
@@ -54,6 +63,7 @@ namespace Tests
             characterControllerCSharp = Container.Resolve<CharacterController_CSharp>();
             timeSystem                = Container.Resolve<ITimeSystem>();
             mainCharacter             = Container.ResolveId<Transform>(transformId);
+            GivenDeltaTime(1);
         }
 
     #endregion
@@ -69,6 +79,12 @@ namespace Tests
         {
             var position = mainCharacter.position;
             Assert.AreEqual(expectedX , position.x , $"position is not equal");
+        }
+
+        private void ShouldMovingStateEqual(MovingState exceptState)
+        {
+            Assert.AreEqual(exceptState , characterControllerCSharp.CurrentMovingState ,
+                            "MovingState is not equal");
         }
 
     #endregion

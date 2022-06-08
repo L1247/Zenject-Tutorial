@@ -20,15 +20,15 @@ namespace Script
 
     #region Public Methods
 
-        public void HorizontalMove()
-        {
-            var horizontalValue = inputSystemManager.GetHorizontalValue();
-            characterController.HorizontalMove(horizontalValue);
-        }
-
         public void Tick()
         {
-            HorizontalMove();
+            Walk();
+        }
+
+        public void Walk()
+        {
+            var horizontalValue = inputSystemManager.GetHorizontalValue();
+            characterController.Walk(horizontalValue);
         }
 
     #endregion

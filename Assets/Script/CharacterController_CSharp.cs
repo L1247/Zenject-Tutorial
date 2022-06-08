@@ -13,13 +13,26 @@ namespace Script
 
         void HorizontalMove(int horizontalValue);
 
+        void Walk(int horizontalValue);
+
     #endregion
     }
 
     public interface ICharacter : IMove { }
 
+    public enum MovingState
+    {
+        None , Walk , Dash
+    }
+
     public class CharacterController_CSharp : ICharacter
     {
+    #region Public Variables
+
+        public MovingState CurrentMovingState { get; private set; }
+
+    #endregion
+
     #region Private Variables
 
         [Inject(Id = "MainPlayer")]
@@ -48,6 +61,12 @@ namespace Script
             var deltaTime   = timeSystem.GetDeltaTime();
             var newPosition = Vector3.right * (horizontalValue * deltaTime) * moveSpeed;
             mainCharacter.position += newPosition;
+        }
+
+        public void Walk(int horizontalValue)
+        {
+            HorizontalMove(horizontalValue);
+            CurrentMovingState = MovingState.Walk;
         }
 
     #endregion
