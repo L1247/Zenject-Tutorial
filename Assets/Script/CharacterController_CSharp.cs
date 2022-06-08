@@ -1,19 +1,20 @@
+#region
+
 using UnityEngine;
 using Zenject;
 
+#endregion
+
 namespace Script
 {
-    public class CharacterController_CSharp : ITickable
+    public class CharacterController_CSharp
     {
     #region Private Variables
-
-        [Inject]
-        private IInputSystem inputSystemManager;
 
         [Inject(Id = "MainPlayer")]
         private Transform mainCharacter;
 
-        private readonly float       moveSpeed;
+        private readonly float moveSpeed;
 
         [Inject]
         private ITimeSystem timeSystem;
@@ -24,24 +25,14 @@ namespace Script
 
         public CharacterController_CSharp()
         {
-            moveSpeed  = 5;
+            moveSpeed = 5;
         }
 
     #endregion
 
     #region Public Methods
 
-        public void Tick()
-        {
-            var horizontalValue = inputSystemManager.GetHorizontalValue();
-            HorizontalMove(horizontalValue);
-        }
-
-    #endregion
-
-    #region Private Methods
-
-        private void HorizontalMove(int horizontalValue)
+        public void HorizontalMove(int horizontalValue)
         {
             var deltaTime   = timeSystem.GetDeltaTime();
             var newPosition = Vector3.right * (horizontalValue * deltaTime) * moveSpeed;

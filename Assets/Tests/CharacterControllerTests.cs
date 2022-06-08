@@ -1,20 +1,47 @@
+#region
+
 using NSubstitute;
 using NUnit.Framework;
 using Script;
 using UnityEngine;
 using Zenject;
 
+#endregion
+
 namespace Tests
 {
     public class CharacterControllerTests : ZenjectUnitTestFixture
     {
+    #region Private Variables
+
         private string                     transformId = "MainPlayer";
         private CharacterController_CSharp characterControllerCSharp;
-        private IInputSystem               inputSystem;
         private ITimeSystem                timeSystem;
         private Transform                  mainCharacter;
 
-    #region Overrides of ZenjectUnitTestFixture
+    #endregion
+
+    #region Test Methods
+
+        [Test]
+        [TestCase(-1 , -5f , Description = "往左移動")]
+        [TestCase(0 ,  0 ,   Description = "停止移動")]
+        [TestCase(1 ,  5f ,  Description = "往右移動")]
+        public void HorizontalMove(int horizontal , float expectedX)
+        {
+            // arrange // given
+            GivenDeltaTime(1);
+
+            // act // when
+            characterControllerCSharp.HorizontalMove(horizontal);
+
+            // assert // then
+            Should_X_Equal(expectedX);
+        }
+
+    #endregion
+
+    #region Public Methods
 
         public override void Setup()
         {
@@ -26,33 +53,17 @@ namespace Tests
             Container.Bind<CharacterController_CSharp>().AsSingle();
 
             characterControllerCSharp = Container.Resolve<CharacterController_CSharp>();
-            inputSystem               = Container.Resolve<IInputSystem>();
             timeSystem                = Container.Resolve<ITimeSystem>();
             mainCharacter             = Container.ResolveId<Transform>(transformId);
         }
 
     #endregion
 
-        [Test]
-        [TestCase(-1 , -5f , Description = "往左移動")]
-        [TestCase(0 ,  0 ,   Description = "停止移動")]
-        [TestCase(1 ,  5f ,  Description = "往右移動")]
-        public void HorizontalMove(int horizontal , float expectedX)
+    #region Private Methods
+
+        private void GivenDeltaTime(int deltaTime)
         {
-            // arrange // given
-            GivenHorizontalValue(horizontal);
-            GivenDeltaTime(1);
-
-            // act // when
-            TickCharacter();
-
-            // assert // then
-            Should_X_Equal(expectedX);
-        }
-
-        private void TickCharacter()
-        {
-            characterControllerCSharp.Tick();
+            timeSystem.GetDeltaTime().Returns(deltaTime);
         }
 
         private void Should_X_Equal(float expectedX)
@@ -61,14 +72,6 @@ namespace Tests
             Assert.AreEqual(expectedX , position.x , $"position is not equal");
         }
 
-        private void GivenDeltaTime(int deltaTime)
-        {
-            timeSystem.GetDeltaTime().Returns(deltaTime);
-        }
-
-        private void GivenHorizontalValue(int horizontal)
-        {
-            inputSystem.GetHorizontalValue().Returns(horizontal);
-        }
+    #endregion
     }
 }
