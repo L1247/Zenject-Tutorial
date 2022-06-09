@@ -11,7 +11,7 @@ namespace Script
     #region Private Variables
 
         [Inject]
-        private ICharacter characterController;
+        private ICharacterService service;
 
         [Inject]
         private IInputSystem inputSystemManager;
@@ -22,16 +22,22 @@ namespace Script
 
         public void Tick()
         {
-            if (inputSystemManager.IsDashKeyDown())
-                characterController.DoDash(10 , 10);
-            else
-                Walk();
+            // if (inputSystemManager.IsDashKeyDown())
+            //     characterController.DoDash(10 , 10);
+            // else
+
+            DoWalk();
         }
 
-        public void Walk()
+    #endregion
+
+    #region Private Methods
+
+        private void DoWalk()
         {
             var horizontalValue = inputSystemManager.GetHorizontalValue();
-            characterController.Walk(horizontalValue);
+            var canWalk         = horizontalValue != 0;
+            if (canWalk) service.Walk(horizontalValue);
         }
 
     #endregion

@@ -13,24 +13,36 @@ namespace Tests
     {
     #region Private Variables
 
-        private IInputSystem     inputSystem;
-        private ICharacter       character;
-        private PlayerController playerController;
+        private IInputSystem      inputSystem;
+        private ICharacterService service;
+        private PlayerController  playerController;
 
     #endregion
 
     #region Test Methods
 
         [Test]
-        public void Walk()
+        [TestCase(-1 , Description = "輸入值為往左移動")]
+        [TestCase(1 ,  Description = "輸入值為往右移動")]
+        public void Should_Call_Walk_When_Tick(int exceptHorizontalValue)
         {
             // arrange // given
-            var exceptHorizontalValue = 99;
             inputSystem.GetHorizontalValue().Returns(exceptHorizontalValue);
             // act // when
-            playerController.Walk();
+            playerController.Tick();
             // assert // then
-            character.Received(1).Walk(exceptHorizontalValue);
+            service.Received(1).Walk(exceptHorizontalValue);
+        }
+
+        [Test]
+        public void Should_Did_Not_Receive_Walk_When_Tick()
+        {
+            // arrange // given
+            inputSystem.GetHorizontalValue().Returns(0);
+            // act // when
+            playerController.Tick();
+            // assert // then
+            service.DidNotReceiveWithAnyArgs().Walk(0);
         }
 
     #endregion
@@ -42,26 +54,14 @@ namespace Tests
             base.Setup();
 
             Container.Bind<IInputSystem>().FromSubstitute().AsSingle();
-            Container.Bind<ICharacter>().FromSubstitute().AsSingle();
+            Container.Bind<ICharacterService>().FromSubstitute().AsSingle();
             Container.Bind<PlayerController>().AsSingle();
 
             inputSystem      = Container.Resolve<IInputSystem>();
-            character        = Container.Resolve<ICharacter>();
+            service          = Container.Resolve<ICharacterService>();
             playerController = Container.Resolve<PlayerController>();
         }
 
     #endregion
-
-        // [Test]
-        // public void DoDash()
-        // {
-        //     // arrange // given
-        //     var exceptHorizontalValue = 99;
-        //     inputSystem.GetHorizontalValue().Returns(exceptHorizontalValue);
-        //     // act // when
-        //     playerController.Walk();
-        //     // assert // then
-        //     character.Received(1).Walk(exceptHorizontalValue);
-        // }
     }
 }

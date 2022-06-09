@@ -10,6 +10,9 @@ namespace Script
     {
     #region Public Methods
 
+        /// <summary>
+        /// </summary>
+        /// <returns>-1 , 0 , 1</returns>
         int GetHorizontalValue();
 
         bool IsDashKeyDown();
