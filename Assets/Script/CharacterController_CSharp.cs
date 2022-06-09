@@ -13,8 +13,6 @@ namespace Script
 
         void DoDash(int horizontalValue , int frame);
 
-        void HorizontalMove(int horizontalValue);
-
         void Walk(int horizontalValue);
 
     #endregion
@@ -24,7 +22,7 @@ namespace Script
 
     public enum MovingState
     {
-        None , Walk , Dash
+        Idle , Walk , Dash
     }
 
     public class CharacterController_CSharp : ICharacter , ITickable
@@ -63,8 +61,7 @@ namespace Script
 
         public void DoDash(int horizontalValue , int frame)
         {
-            dashFrame = frame;
-            Debug.Log($"{frame}");
+            dashFrame           = frame;
             dashHorizontalValue = horizontalValue;
             CurrentMovingState  = MovingState.Dash;
         }
@@ -78,12 +75,7 @@ namespace Script
 
         public void Tick()
         {
-            if (CurrentMovingState == MovingState.Dash)
-            {
-                dashFrame -= 1;
-                if (dashFrame == 0) CurrentMovingState = MovingState.None;
-                HorizontalMove(dashHorizontalValue);
-            }
+            TickDash();
         }
 
         public void Walk(int horizontalValue)
@@ -92,6 +84,20 @@ namespace Script
                 return;
             HorizontalMove(horizontalValue);
             CurrentMovingState = MovingState.Walk;
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private void TickDash()
+        {
+            if (CurrentMovingState == MovingState.Dash)
+            {
+                dashFrame -= 1;
+                if (dashFrame == 0) CurrentMovingState = MovingState.Idle;
+                HorizontalMove(dashHorizontalValue);
+            }
         }
 
     #endregion

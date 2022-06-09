@@ -58,13 +58,13 @@ namespace Tests
             TickCharacter(dashFrame);
             // assert
             Should_X_Equal(25);
-            ShouldMovingStateEqual(MovingState.None);
+            ShouldMovingStateEqual(MovingState.Idle);
         }
 
         [Test]
         public void Init()
         {
-            ShouldMovingStateEqual(MovingState.None);
+            ShouldMovingStateEqual(MovingState.Idle);
         }
 
     #endregion
