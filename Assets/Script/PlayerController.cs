@@ -23,13 +23,18 @@ namespace Script
         public void Tick()
         {
             DoWalk();
-            if (inputSystemManager.IsDashKeyDown())
-                service.Dash();
+            DoDash();
         }
 
     #endregion
 
     #region Private Methods
+
+        private void DoDash()
+        {
+            var isDashKeyDown = inputSystemManager.IsDashKeyDown();
+            if (isDashKeyDown) service.Dash();
+        }
 
         private void DoWalk()
         {
