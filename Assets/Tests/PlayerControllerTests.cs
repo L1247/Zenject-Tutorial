@@ -56,6 +56,17 @@ namespace Tests
             service.Received(1).Dash();
         }
 
+        [Test]
+        public void Should_Did_Not_Receive_Dash_When_Tick()
+        {
+            // arrange // given
+            inputSystem.IsDashKeyDown().Returns(false);
+            // act // when
+            playerController.Tick();
+            // assert // then
+            service.DidNotReceiveWithAnyArgs().Dash();
+        }
+
     #endregion
 
     #region Public Methods
