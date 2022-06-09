@@ -1,6 +1,5 @@
 #region
 
-using System;
 using Zenject;
 
 #endregion
@@ -21,6 +20,12 @@ namespace Script
 
     public class CharacterService : ICharacterService
     {
+    #region Public Variables
+
+        public readonly int dashValue = 10;
+
+    #endregion
+
     #region Private Variables
 
         [Inject]
@@ -32,7 +37,7 @@ namespace Script
 
         public void Dash()
         {
-            throw new NotImplementedException();
+            character.Dash(dashValue);
         }
 
         public void Walk(int right)

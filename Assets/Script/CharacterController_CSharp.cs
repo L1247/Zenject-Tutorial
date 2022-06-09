@@ -11,7 +11,7 @@ namespace Script
     {
     #region Public Methods
 
-        void DoDash(int horizontalValue , int frame);
+        void Dash(int value);
 
         void Walk(int horizontalValue);
 
@@ -44,7 +44,7 @@ namespace Script
         private ITimeSystem timeSystem;
 
         private int dashHorizontalValue;
-        private int dashFrame;
+        private int dashFrame = 5;
 
     #endregion
 
@@ -59,10 +59,9 @@ namespace Script
 
     #region Public Methods
 
-        public void DoDash(int horizontalValue , int frame)
+        public void Dash(int value)
         {
-            dashFrame           = frame;
-            dashHorizontalValue = horizontalValue;
+            dashHorizontalValue = value;
             CurrentMovingState  = MovingState.Dash;
         }
 
