@@ -42,10 +42,26 @@ namespace Tests
         public void Walk()
         {
             // act
-            characterControllerCSharp.Walk(1);
+            var horizontalValue = 1;
+            characterControllerCSharp.Walk(horizontalValue);
             // assert
-            Should_X_Equal(5);
-            ShouldMovingStateEqual(CharacterState.Walk);
+            Should_X_Equal(GetXByHorizontal(horizontalValue));
+            ShouldStateEqual(CharacterState.Walk);
+        }
+
+        [Test]
+        public void Given_Walk_State_Did_Not_Walk_When_Walk()
+        {
+            // given
+            // Walk state
+            var horizontalValue = 1;
+            characterControllerCSharp.Walk(horizontalValue);
+            ShouldStateEqual(CharacterState.Walk);
+
+            // act
+            characterControllerCSharp.Walk(0);
+            Should_X_Equal(GetXByHorizontal(horizontalValue));
+            ShouldStateEqual(CharacterState.Idle);
         }
 
         [Test]
@@ -53,17 +69,17 @@ namespace Tests
         {
             // act
             characterControllerCSharp.Dash(1);
-            ShouldMovingStateEqual(CharacterState.Dash);
+            ShouldStateEqual(CharacterState.Dash);
             TickCharacter();
             // assert
             Should_X_Equal(25);
-            ShouldMovingStateEqual(CharacterState.Idle);
+            ShouldStateEqual(CharacterState.Idle);
         }
 
         [Test]
         public void Init()
         {
-            ShouldMovingStateEqual(CharacterState.Idle);
+            ShouldStateEqual(CharacterState.Idle);
         }
 
     #endregion
@@ -88,6 +104,11 @@ namespace Tests
 
     #region Private Methods
 
+        private float GetXByHorizontal(int horizontalValue)
+        {
+            return horizontalValue * characterControllerCSharp.moveSpeed;
+        }
+
         private void GivenDeltaTime(int deltaTime)
         {
             timeSystem.GetDeltaTime().Returns(deltaTime);
@@ -99,7 +120,7 @@ namespace Tests
             Assert.AreEqual(expectedX , position.x , $"position is not equal");
         }
 
-        private void ShouldMovingStateEqual(CharacterState exceptState)
+        private void ShouldStateEqual(CharacterState exceptState)
         {
             Assert.AreEqual(exceptState , characterControllerCSharp.State ,
                             "State is not equal");

@@ -36,6 +36,8 @@ namespace Script
     {
     #region Public Variables
 
+        public readonly float moveSpeed = 5;
+
         public CharacterState State { get; private set; }
 
     #endregion
@@ -45,22 +47,11 @@ namespace Script
         [Inject(Id = "MainPlayer")]
         private Transform mainCharacter;
 
-        private readonly float moveSpeed;
-
         [Inject]
         private ITimeSystem timeSystem;
 
         private int dashHorizontalValue;
-        private int dashFrame = 5;
-
-    #endregion
-
-    #region Constructor
-
-        public CharacterController_CSharp()
-        {
-            moveSpeed = 5;
-        }
+        private int dashFrame = 10;
 
     #endregion
 
@@ -86,6 +77,12 @@ namespace Script
 
         public void Walk(int horizontalValue)
         {
+            if (horizontalValue == 0)
+            {
+                State = CharacterState.Idle;
+                return;
+            }
+
             HorizontalMove(horizontalValue);
             State = CharacterState.Walk;
         }
