@@ -68,25 +68,23 @@ namespace Tests
         public void DoDash()
         {
             // act
-            characterControllerCSharp.Dash(1);
-            ShouldStateEqual(CharacterState.Dash);
+            Dash();
             TickCharacter();
             // assert
-            Should_X_Equal(25);
-            ShouldStateEqual(CharacterState.Idle);
+            Should_Dash(25);
         }
 
-        // [Test]
-        // public void DoubleDash()
-        // {
-        //     // act
-        //     characterControllerCSharp.Dash(1);
-        //     ShouldStateEqual(CharacterState.Dash);
-        //     TickCharacter();
-        //     // assert
-        //     Should_X_Equal(25);
-        //     ShouldStateEqual(CharacterState.Idle);
-        // }
+        [Test]
+        public void DoubleDash()
+        {
+            // act
+            Dash();
+            Dash();
+            TickCharacter();
+            TickCharacter();
+            // assert
+            Should_Dash(50);
+        }
 
         [Test]
         public void Init()
@@ -116,6 +114,12 @@ namespace Tests
 
     #region Private Methods
 
+        private void Dash()
+        {
+            characterControllerCSharp.Dash(1);
+            TickCharacter();
+        }
+
         private float GetXByHorizontal(int horizontalValue)
         {
             return horizontalValue * characterControllerCSharp.moveSpeed;
@@ -124,6 +128,12 @@ namespace Tests
         private void GivenDeltaTime(int deltaTime)
         {
             timeSystem.GetDeltaTime().Returns(deltaTime);
+        }
+
+        private void Should_Dash(int expectedX)
+        {
+            Should_X_Equal(expectedX);
+            ShouldStateEqual(CharacterState.Idle);
         }
 
         private void Should_X_Equal(float expectedX)
@@ -140,7 +150,8 @@ namespace Tests
 
         private void TickCharacter()
         {
-            for (var i = 0 ; i < 5 ; i++) characterControllerCSharp.Tick();
+            for (var i = 0 ; i < characterControllerCSharp.defaultDashFrame ; i++)
+                characterControllerCSharp.Tick();
         }
 
     #endregion

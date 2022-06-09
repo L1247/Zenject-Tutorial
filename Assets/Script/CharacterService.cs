@@ -37,17 +37,31 @@ namespace Script
 
         public void Dash()
         {
-            // 條件: 角色狀態是Walk
-            var isStateNotWalk = character.State != CharacterState.Walk;
+            // 條件: 角色狀態是Walk，則不能中斷。
+            var isStateNotWalk = IsNotState(CharacterState.Walk);
             if (isStateNotWalk) return;
             character.Dash(dashValue);
         }
 
         public void Walk(int right)
         {
-            var isStateDash = character.State == CharacterState.Dash;
+            var isStateDash = IsState(CharacterState.Dash);
             if (isStateDash) return;
             character.Walk(right);
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private bool IsNotState(CharacterState state)
+        {
+            return character.State != state;
+        }
+
+        private bool IsState(CharacterState characterState)
+        {
+            return character.State == characterState;
         }
 
     #endregion

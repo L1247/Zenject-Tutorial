@@ -38,6 +38,8 @@ namespace Script
 
         public readonly float moveSpeed = 5;
 
+        public readonly int defaultDashFrame = 5;
+
         public CharacterState State { get; private set; }
 
     #endregion
@@ -51,8 +53,7 @@ namespace Script
         private ITimeSystem timeSystem;
 
         private int dashHorizontalValue;
-
-        private int dashFrame = 5;
+        private int dashFrame;
 
     #endregion
 
@@ -60,6 +61,7 @@ namespace Script
 
         public void Dash(int value)
         {
+            dashFrame           = defaultDashFrame;
             dashHorizontalValue = value;
             State               = CharacterState.Dash;
         }
