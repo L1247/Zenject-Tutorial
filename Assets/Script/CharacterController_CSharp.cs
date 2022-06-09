@@ -51,7 +51,8 @@ namespace Script
         private ITimeSystem timeSystem;
 
         private int dashHorizontalValue;
-        private int dashFrame = 10;
+
+        private int dashFrame = 5;
 
     #endregion
 

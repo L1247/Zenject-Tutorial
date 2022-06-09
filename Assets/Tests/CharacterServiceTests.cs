@@ -24,10 +24,20 @@ namespace Tests
         [Test]
         public void Walk()
         {
+            character.State.Returns(CharacterState.Idle);
             var right = Random.Range(-99 , 99);
             characterService.Walk(right);
             character.Received(1).Walk(right);
         }
+
+        [Test]
+        public void Did_Not_Walk()
+        {
+            character.State.Returns(CharacterState.Dash);
+            characterService.Walk(99);
+            character.DidNotReceiveWithAnyArgs().Walk(0);
+        }
+
 
         [Test]
         public void Dash()

@@ -45,6 +45,8 @@ namespace Script
 
         public void Walk(int right)
         {
+            var isStateDash = character.State == CharacterState.Dash;
+            if (isStateDash) return;
             character.Walk(right);
         }
 

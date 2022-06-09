@@ -76,6 +76,18 @@ namespace Tests
             ShouldStateEqual(CharacterState.Idle);
         }
 
+        // [Test]
+        // public void DoubleDash()
+        // {
+        //     // act
+        //     characterControllerCSharp.Dash(1);
+        //     ShouldStateEqual(CharacterState.Dash);
+        //     TickCharacter();
+        //     // assert
+        //     Should_X_Equal(25);
+        //     ShouldStateEqual(CharacterState.Idle);
+        // }
+
         [Test]
         public void Init()
         {
