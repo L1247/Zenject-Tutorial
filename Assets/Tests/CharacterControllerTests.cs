@@ -45,7 +45,7 @@ namespace Tests
             characterControllerCSharp.Walk(1);
             // assert
             Should_X_Equal(5);
-            ShouldMovingStateEqual(MovingState.Walk);
+            ShouldMovingStateEqual(CharacterState.Walk);
         }
 
         [Test]
@@ -53,17 +53,17 @@ namespace Tests
         {
             // act
             characterControllerCSharp.Dash(1);
-            ShouldMovingStateEqual(MovingState.Dash);
+            ShouldMovingStateEqual(CharacterState.Dash);
             TickCharacter();
             // assert
             Should_X_Equal(25);
-            ShouldMovingStateEqual(MovingState.Idle);
+            ShouldMovingStateEqual(CharacterState.Idle);
         }
 
         [Test]
         public void Init()
         {
-            ShouldMovingStateEqual(MovingState.Idle);
+            ShouldMovingStateEqual(CharacterState.Idle);
         }
 
     #endregion
@@ -99,10 +99,10 @@ namespace Tests
             Assert.AreEqual(expectedX , position.x , $"position is not equal");
         }
 
-        private void ShouldMovingStateEqual(MovingState exceptState)
+        private void ShouldMovingStateEqual(CharacterState exceptState)
         {
-            Assert.AreEqual(exceptState , characterControllerCSharp.CurrentMovingState ,
-                            "MovingState is not equal");
+            Assert.AreEqual(exceptState , characterControllerCSharp.State ,
+                            "State is not equal");
         }
 
         private void TickCharacter()

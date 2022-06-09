@@ -32,8 +32,19 @@ namespace Tests
         [Test]
         public void Dash()
         {
+            character.State.Returns(CharacterState.Walk);
             characterService.Dash();
             character.Received(1).Dash(characterService.dashValue);
+        }
+
+        [Test]
+        [TestCase(CharacterState.Idle)]
+        [TestCase(CharacterState.Dash)]
+        public void Did_Not_Dash(CharacterState characterState)
+        {
+            character.State.Returns(characterState);
+            characterService.Dash();
+            character.DidNotReceiveWithAnyArgs().Dash(0);
         }
 
     #endregion

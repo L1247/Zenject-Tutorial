@@ -37,6 +37,9 @@ namespace Script
 
         public void Dash()
         {
+            // 條件: 角色狀態是Walk
+            var isStateNotWalk = character.State != CharacterState.Walk;
+            if (isStateNotWalk) return;
             character.Dash(dashValue);
         }
 

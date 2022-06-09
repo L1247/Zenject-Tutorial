@@ -22,8 +22,9 @@ namespace Tests
     #region Test Methods
 
         [Test]
-        [TestCase(-1 , Description = "輸入值為往左移動")]
-        [TestCase(1 ,  Description = "輸入值為往右移動")]
+        [TestCase(-1 , Description = "輸入值為-1")]
+        [TestCase(1 ,  Description = "輸入值為1")]
+        [TestCase(0 ,  Description = "輸入值為0")]
         public void Should_Call_Walk_When_Tick(int exceptHorizontalValue)
         {
             // arrange // given
@@ -32,17 +33,6 @@ namespace Tests
             playerController.Tick();
             // assert // then
             service.Received(1).Walk(exceptHorizontalValue);
-        }
-
-        [Test]
-        public void Should_Did_Not_Receive_Walk_When_Tick()
-        {
-            // arrange // given
-            inputSystem.GetHorizontalValue().Returns(0);
-            // act // when
-            playerController.Tick();
-            // assert // then
-            service.DidNotReceiveWithAnyArgs().Walk(0);
         }
 
         [Test]

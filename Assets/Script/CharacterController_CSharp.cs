@@ -18,9 +18,16 @@ namespace Script
     #endregion
     }
 
-    public interface ICharacter : IMove { }
+    public interface ICharacter : IMove
+    {
+    #region Public Variables
 
-    public enum MovingState
+        CharacterState State { get; }
+
+    #endregion
+    }
+
+    public enum CharacterState
     {
         Idle , Walk , Dash
     }
@@ -29,7 +36,7 @@ namespace Script
     {
     #region Public Variables
 
-        public MovingState CurrentMovingState { get; private set; }
+        public CharacterState State { get; private set; }
 
     #endregion
 
@@ -62,7 +69,7 @@ namespace Script
         public void Dash(int value)
         {
             dashHorizontalValue = value;
-            CurrentMovingState  = MovingState.Dash;
+            State               = CharacterState.Dash;
         }
 
         public void HorizontalMove(int horizontalValue)
@@ -79,10 +86,8 @@ namespace Script
 
         public void Walk(int horizontalValue)
         {
-            if (CurrentMovingState == MovingState.Dash)
-                return;
             HorizontalMove(horizontalValue);
-            CurrentMovingState = MovingState.Walk;
+            State = CharacterState.Walk;
         }
 
     #endregion
@@ -91,10 +96,10 @@ namespace Script
 
         private void TickDash()
         {
-            if (CurrentMovingState == MovingState.Dash)
+            if (State == CharacterState.Dash)
             {
                 dashFrame -= 1;
-                if (dashFrame == 0) CurrentMovingState = MovingState.Idle;
+                if (dashFrame == 0) State = CharacterState.Idle;
                 HorizontalMove(dashHorizontalValue);
             }
         }

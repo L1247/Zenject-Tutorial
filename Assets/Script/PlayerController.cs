@@ -39,8 +39,7 @@ namespace Script
         private void DoWalk()
         {
             var horizontalValue = inputSystemManager.GetHorizontalValue();
-            var canWalk         = horizontalValue != 0;
-            if (canWalk) service.Walk(horizontalValue);
+            service.Walk(horizontalValue);
         }
 
     #endregion
