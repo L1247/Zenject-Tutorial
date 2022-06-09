@@ -22,11 +22,9 @@ namespace Script
 
         public void Tick()
         {
-            // if (inputSystemManager.IsDashKeyDown())
-            //     characterController.DoDash(10 , 10);
-            // else
-
             DoWalk();
+            if (inputSystemManager.IsDashKeyDown())
+                service.Dash();
         }
 
     #endregion
