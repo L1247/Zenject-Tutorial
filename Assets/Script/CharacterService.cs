@@ -37,7 +37,7 @@ namespace Script
 
         public void Dash()
         {
-            // 條件: 角色狀態是Walk，則不能中斷。
+            // 條件: 角色狀態不是Walk，則不能執行Dash。
             var isStateNotWalk = IsNotState(CharacterState.Walk);
             if (isStateNotWalk) return;
             character.Dash(dashValue);
