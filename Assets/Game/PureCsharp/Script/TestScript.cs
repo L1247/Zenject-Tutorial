@@ -10,8 +10,8 @@ namespace PureCsharp.Core
     {
     #region Private Variables
 
-        private TimeSystem               timeSystem;
-        private InputSystemManagerCsharp inputSystem;
+        private TimeSystem         timeSystem;
+        private InputSystemManager inputSystem;
 
     #endregion
 
@@ -20,7 +20,7 @@ namespace PureCsharp.Core
         private void Awake()
         {
             timeSystem  = new TimeSystem();
-            inputSystem = new InputSystemManagerCsharp();
+            inputSystem = new InputSystemManager();
         }
 
         private void Update()

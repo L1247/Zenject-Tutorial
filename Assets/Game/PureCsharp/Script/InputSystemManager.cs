@@ -20,7 +20,7 @@ namespace PureCsharp.Core
     #endregion
     }
 
-    public class InputSystemManagerCsharp : IInputSystem
+    public class InputSystemManager : IInputSystem
     {
     #region Public Methods
 

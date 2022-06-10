@@ -5,7 +5,7 @@ using Zenject;
 
 #endregion
 
-public class SampleMonoInstaller : MonoInstaller
+public class ExampleMonoInstaller : MonoInstaller
 {
 #region Public Methods
 
@@ -14,7 +14,7 @@ public class SampleMonoInstaller : MonoInstaller
         Container.Bind(typeof(ICharacter) , typeof(ITickable)).To<CharacterController>().AsSingle();
         Container.Bind<ICharacterService>().To<CharacterService>().AsSingle();
         Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle();
-        Container.Bind<IInputSystem>().To<InputSystemManagerCsharp>().AsSingle();
+        Container.Bind<IInputSystem>().To<InputSystemManager>().AsSingle();
         Container.Bind<ITimeSystem>().To<TimeSystem>().AsSingle();
     }
 
