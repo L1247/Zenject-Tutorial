@@ -32,7 +32,7 @@ namespace PureCsharp.Core
         Idle , Walk , Dash
     }
 
-    public class CharacterController_CSharp : ICharacter , ITickable
+    public class CharacterController : ICharacter , ITickable
     {
     #region Public Variables
 

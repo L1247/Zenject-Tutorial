@@ -5,6 +5,7 @@ using NUnit.Framework;
 using PureCsharp.Core;
 using UnityEngine;
 using Zenject;
+using CharacterController = PureCsharp.Core.CharacterController;
 
 #endregion
 
@@ -14,10 +15,10 @@ namespace PureCsharp.Tests
     {
     #region Private Variables
 
-        private readonly string                     transformId = "MainPlayer";
-        private          CharacterController_CSharp characterControllerCSharp;
-        private          ITimeSystem                timeSystem;
-        private          Transform                  mainCharacter;
+        private readonly string              transformId = "MainPlayer";
+        private          CharacterController characterController;
+        private          ITimeSystem         timeSystem;
+        private          Transform           mainCharacter;
 
     #endregion
 
@@ -32,7 +33,7 @@ namespace PureCsharp.Tests
             // arrange // given
 
             // act // when
-            characterControllerCSharp.HorizontalMove(horizontal);
+            characterController.HorizontalMove(horizontal);
 
             // assert // then
             Should_X_Equal(expectedX);
@@ -43,7 +44,7 @@ namespace PureCsharp.Tests
         {
             // act
             var horizontalValue = 1;
-            characterControllerCSharp.Walk(horizontalValue);
+            characterController.Walk(horizontalValue);
             // assert
             Should_X_Equal(GetXByHorizontal(horizontalValue));
             ShouldStateEqual(CharacterState.Walk);
@@ -55,11 +56,11 @@ namespace PureCsharp.Tests
             // given
             // Walk state
             var horizontalValue = 1;
-            characterControllerCSharp.Walk(horizontalValue);
+            characterController.Walk(horizontalValue);
             ShouldStateEqual(CharacterState.Walk);
 
             // act
-            characterControllerCSharp.Walk(0);
+            characterController.Walk(0);
             Should_X_Equal(GetXByHorizontal(horizontalValue));
             ShouldStateEqual(CharacterState.Idle);
         }
@@ -102,11 +103,11 @@ namespace PureCsharp.Tests
 
             Container.Bind<Transform>().WithId(transformId).FromNewComponentOnNewGameObject().AsSingle();
             Container.Bind<ITimeSystem>().FromSubstitute().AsSingle();
-            Container.Bind<CharacterController_CSharp>().AsSingle();
+            Container.Bind<CharacterController>().AsSingle();
 
-            characterControllerCSharp = Container.Resolve<CharacterController_CSharp>();
-            timeSystem                = Container.Resolve<ITimeSystem>();
-            mainCharacter             = Container.ResolveId<Transform>(transformId);
+            characterController = Container.Resolve<CharacterController>();
+            timeSystem          = Container.Resolve<ITimeSystem>();
+            mainCharacter       = Container.ResolveId<Transform>(transformId);
             GivenDeltaTime(1);
         }
 
@@ -116,13 +117,13 @@ namespace PureCsharp.Tests
 
         private void Dash()
         {
-            characterControllerCSharp.Dash(1);
+            characterController.Dash(1);
             TickCharacter();
         }
 
         private float GetXByHorizontal(int horizontalValue)
         {
-            return horizontalValue * characterControllerCSharp.moveSpeed;
+            return horizontalValue * characterController.moveSpeed;
         }
 
         private void GivenDeltaTime(int deltaTime)
@@ -144,14 +145,14 @@ namespace PureCsharp.Tests
 
         private void ShouldStateEqual(CharacterState exceptState)
         {
-            Assert.AreEqual(exceptState , characterControllerCSharp.State ,
+            Assert.AreEqual(exceptState , characterController.State ,
                             "State is not equal");
         }
 
         private void TickCharacter()
         {
-            for (var i = 0 ; i < characterControllerCSharp.defaultDashFrame ; i++)
-                characterControllerCSharp.Tick();
+            for (var i = 0 ; i < characterController.defaultDashFrame ; i++)
+                characterController.Tick();
         }
 
     #endregion
