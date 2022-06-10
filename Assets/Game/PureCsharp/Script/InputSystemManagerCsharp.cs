@@ -4,7 +4,7 @@ using UnityEngine;
 
 #endregion
 
-namespace Script
+namespace PureCsharp.Core
 {
     public interface IInputSystem
     {

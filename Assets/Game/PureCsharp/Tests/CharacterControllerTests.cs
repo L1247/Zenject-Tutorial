@@ -2,22 +2,22 @@
 
 using NSubstitute;
 using NUnit.Framework;
-using Script;
+using PureCsharp.Core;
 using UnityEngine;
 using Zenject;
 
 #endregion
 
-namespace Tests
+namespace PureCsharp.Tests
 {
     public class CharacterControllerTests : ZenjectUnitTestFixture
     {
     #region Private Variables
 
-        private string                     transformId = "MainPlayer";
-        private CharacterController_CSharp characterControllerCSharp;
-        private ITimeSystem                timeSystem;
-        private Transform                  mainCharacter;
+        private readonly string                     transformId = "MainPlayer";
+        private          CharacterController_CSharp characterControllerCSharp;
+        private          ITimeSystem                timeSystem;
+        private          Transform                  mainCharacter;
 
     #endregion
 
@@ -139,7 +139,7 @@ namespace Tests
         private void Should_X_Equal(float expectedX)
         {
             var position = mainCharacter.position;
-            Assert.AreEqual(expectedX , position.x , $"position is not equal");
+            Assert.AreEqual(expectedX , position.x , "position is not equal");
         }
 
         private void ShouldStateEqual(CharacterState exceptState)

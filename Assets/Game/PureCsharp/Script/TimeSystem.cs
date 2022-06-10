@@ -1,6 +1,10 @@
+#region
+
 using UnityEngine;
 
-namespace Script
+#endregion
+
+namespace PureCsharp.Core
 {
     public interface ITimeSystem
     {

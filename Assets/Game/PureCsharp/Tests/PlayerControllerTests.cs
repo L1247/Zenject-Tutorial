@@ -2,12 +2,12 @@
 
 using NSubstitute;
 using NUnit.Framework;
-using Script;
+using PureCsharp.Core;
 using Zenject;
 
 #endregion
 
-namespace Tests
+namespace PureCsharp.Tests
 {
     public class PlayerControllerTests : ZenjectUnitTestFixture
     {

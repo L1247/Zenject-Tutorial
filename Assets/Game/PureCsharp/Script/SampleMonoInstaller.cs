@@ -1,6 +1,6 @@
 #region
 
-using Script;
+using PureCsharp.Core;
 using Zenject;
 
 #endregion

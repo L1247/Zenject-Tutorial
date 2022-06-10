@@ -1,12 +1,21 @@
-using System;
+#region
+
 using UnityEngine;
 
-namespace Script
+#endregion
+
+namespace PureCsharp.Core
 {
     public class TestScript : MonoBehaviour
     {
+    #region Private Variables
+
         private TimeSystem               timeSystem;
         private InputSystemManagerCsharp inputSystem;
+
+    #endregion
+
+    #region Unity events
 
         private void Awake()
         {
@@ -19,5 +28,7 @@ namespace Script
             // Debug.Log($"{timeSystem.GetDeltaTime()}");
             Debug.Log($"{inputSystem.GetHorizontalValue()}");
         }
+
+    #endregion
     }
 }

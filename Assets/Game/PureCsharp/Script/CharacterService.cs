@@ -4,7 +4,7 @@ using Zenject;
 
 #endregion
 
-namespace Script
+namespace PureCsharp.Core
 {
     public interface ICharacterService
     {
