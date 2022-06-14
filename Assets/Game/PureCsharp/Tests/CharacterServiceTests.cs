@@ -22,29 +22,29 @@ namespace PureCsharp.Tests
     #region Test Methods
 
         [Test]
-        public void Walk()
+        public void DoWalk()
         {
-            character.State.Returns(CharacterState.Idle);
             var right = Random.Range(-99 , 99);
-            characterService.Walk(right);
-            character.Received(1).Walk(right);
+            GivenCharacterState(CharacterState.Idle);
+            Walk(right);
+            ShouldWalk(right);
         }
 
         [Test]
         public void Did_Not_Walk()
         {
-            character.State.Returns(CharacterState.Dash);
-            characterService.Walk(99);
-            character.DidNotReceiveWithAnyArgs().Walk(0);
+            GivenCharacterState(CharacterState.Dash);
+            Walk(99);
+            DidNotWalk();
         }
 
 
         [Test]
-        public void Dash()
+        public void DoDash()
         {
-            character.State.Returns(CharacterState.Walk);
-            characterService.Dash();
-            character.Received(1).Dash(characterService.dashValue);
+            GivenCharacterState(CharacterState.Walk);
+            Dash();
+            Should_Dash();
         }
 
         [Test]
@@ -52,9 +52,9 @@ namespace PureCsharp.Tests
         [TestCase(CharacterState.Dash)]
         public void Did_Not_Dash(CharacterState characterState)
         {
-            character.State.Returns(characterState);
-            characterService.Dash();
-            character.DidNotReceiveWithAnyArgs().Dash(0);
+            GivenCharacterState(characterState);
+            Dash();
+            DidNotDash();
         }
 
     #endregion
@@ -68,6 +68,45 @@ namespace PureCsharp.Tests
             Container.Bind<ICharacter>().FromSubstitute();
             characterService = Container.Resolve<CharacterService>();
             character        = Container.Resolve<ICharacter>();
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private void Dash()
+        {
+            characterService.Dash();
+        }
+
+        private void DidNotDash()
+        {
+            character.DidNotReceiveWithAnyArgs().Dash(0);
+        }
+
+        private void DidNotWalk()
+        {
+            character.DidNotReceiveWithAnyArgs().Walk(0);
+        }
+
+        private void GivenCharacterState(CharacterState characterState)
+        {
+            character.State.Returns(characterState);
+        }
+
+        private void Should_Dash()
+        {
+            character.Received(1).Dash(characterService.dashValue);
+        }
+
+        private void ShouldWalk(int right)
+        {
+            character.Received(1).Walk(right);
+        }
+
+        private void Walk(int right)
+        {
+            characterService.Walk(right);
         }
 
     #endregion
