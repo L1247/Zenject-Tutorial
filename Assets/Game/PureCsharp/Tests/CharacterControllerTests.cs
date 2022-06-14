@@ -61,20 +61,11 @@ namespace PureCsharp.Tests
         }
 
         [Test]
-        public void Should_Succeed_When_Dash()
+        [TestCase(1)]
+        [TestCase(2)]
+        public void DashByTimes(int times)
         {
             // act
-            Dash();
-            TickCharacter();
-            // assert
-            Should_Dash(1);
-        }
-
-        [Test]
-        public void DoubleDash()
-        {
-            // act
-            var times = 2;
             DashByCount(times);
             // assert
             Should_Dash(times);
