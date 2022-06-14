@@ -25,72 +25,65 @@ namespace PureCsharp.Tests
     #region Test Methods
 
         [Test]
-        [TestCase(-1 , -5f , Description = "往左移動")]
-        [TestCase(0 ,  0 ,   Description = "停止移動")]
-        [TestCase(1 ,  5f ,  Description = "往右移動")]
-        public void HorizontalMove(int horizontal , float expectedX)
+        [TestCase(-1 , Description = "往左移動")]
+        [TestCase(0 ,  Description = "停止移動")]
+        [TestCase(1 ,  Description = "往右移動")]
+        public void Should_Succeed_When_HorizontalMove(int value)
         {
-            // arrange // given
-
             // act // when
-            characterController.HorizontalMove(horizontal);
-
+            HorizontalMove(value);
             // assert // then
-            Should_X_Equal(expectedX);
+            Should_Pos_X_Equal(value);
         }
 
         [Test]
-        public void Walk()
+        public void Should_Succeed_When_Walk()
         {
             // act
-            var horizontalValue = 1;
-            characterController.Walk(horizontalValue);
+            Walk(1);
             // assert
-            Should_X_Equal(GetXByHorizontal(horizontalValue));
-            ShouldStateEqual(CharacterState.Walk);
+            Should_Pos_X_Equal(1);
+            Should_State_Equal(CharacterState.Walk);
         }
 
         [Test]
         public void Given_Walk_State_Did_Not_Walk_When_Walk()
         {
             // given
-            // Walk state
-            var horizontalValue = 1;
-            characterController.Walk(horizontalValue);
-            ShouldStateEqual(CharacterState.Walk);
+            // Should_Succeed_When_Walk state
+            Walk(1);
+            Should_State_Equal(CharacterState.Walk);
 
             // act
             characterController.Walk(0);
-            Should_X_Equal(GetXByHorizontal(horizontalValue));
-            ShouldStateEqual(CharacterState.Idle);
+            Should_Pos_X_Equal(1);
+            Should_State_Equal(CharacterState.Idle);
         }
 
         [Test]
-        public void DoDash()
+        public void Should_Succeed_When_Dash()
         {
             // act
             Dash();
             TickCharacter();
             // assert
-            Should_Dash(25);
+            Should_Dash(1);
         }
 
         [Test]
         public void DoubleDash()
         {
             // act
-            Dash();
-            Dash();
-            TickCharacter();
-            TickCharacter();
+            var times = 2;
+            DashByCount(times);
             // assert
-            Should_Dash(50);
+            Should_Dash(times);
         }
 
         [Test]
         public void Init()
         {
-            ShouldStateEqual(CharacterState.Idle);
+            Should_State_Equal(CharacterState.Idle);
         }
 
     #endregion
@@ -121,6 +114,15 @@ namespace PureCsharp.Tests
             TickCharacter();
         }
 
+        private void DashByCount(int times)
+        {
+            for (var i = 0 ; i < times ; i++)
+            {
+                Dash();
+                TickCharacter();
+            }
+        }
+
         private float GetXByHorizontal(int horizontalValue)
         {
             return horizontalValue * characterController.moveSpeed;
@@ -131,19 +133,26 @@ namespace PureCsharp.Tests
             timeSystem.GetDeltaTime().Returns(deltaTime);
         }
 
-        private void Should_Dash(int expectedX)
+        private void HorizontalMove(int horizontal)
         {
-            Should_X_Equal(expectedX);
-            ShouldStateEqual(CharacterState.Idle);
+            characterController.HorizontalMove(horizontal);
         }
 
-        private void Should_X_Equal(float expectedX)
+        private void Should_Dash(int dashCount)
         {
+            var x = characterController.defaultDashFrame * dashCount;
+            Should_Pos_X_Equal(x);
+            Should_State_Equal(CharacterState.Idle);
+        }
+
+        private void Should_Pos_X_Equal(int horizontalValue)
+        {
+            var exceptX  = GetXByHorizontal(horizontalValue);
             var position = mainCharacter.position;
-            Assert.AreEqual(expectedX , position.x , "position is not equal");
+            Assert.AreEqual(exceptX , position.x , "position is not equal");
         }
 
-        private void ShouldStateEqual(CharacterState exceptState)
+        private void Should_State_Equal(CharacterState exceptState)
         {
             Assert.AreEqual(exceptState , characterController.State ,
                             "State is not equal");
@@ -153,6 +162,11 @@ namespace PureCsharp.Tests
         {
             for (var i = 0 ; i < characterController.defaultDashFrame ; i++)
                 characterController.Tick();
+        }
+
+        private void Walk(int value)
+        {
+            characterController.Walk(value);
         }
 
     #endregion
