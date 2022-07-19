@@ -4,7 +4,6 @@ using System;
 using PureCsharp.Core;
 using UnityEngine;
 using Zenject;
-using CharacterController = PureCsharp.Core.CharacterController;
 
 #endregion
 
@@ -22,11 +21,7 @@ public class ExampleMonoInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<Transform>().WithId("MainPlayer").FromComponentInNewPrefab(setting.characterPrefab).AsSingle();
-        Container.Bind(typeof(ICharacter) , typeof(ITickable)).To<CharacterController>().AsSingle();
-        Container.Bind<ICharacterService>().To<CharacterService>().AsSingle();
-        Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle();
-        Container.Bind<IInputSystem>().To<InputSystemManager>().AsSingle();
-        Container.Bind<ITimeSystem>().To<TimeSystem>().AsSingle();
+        ExampleInstaller.Install(Container);
     }
 
 #endregion
