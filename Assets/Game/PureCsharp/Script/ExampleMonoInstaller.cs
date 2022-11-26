@@ -20,6 +20,7 @@ public class ExampleMonoInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        Application.targetFrameRate = 60;
         Container.Bind<Transform>().WithId("MainPlayer").FromComponentInNewPrefab(setting.characterPrefab).AsSingle();
         ExampleInstaller.Install(Container);
     }
