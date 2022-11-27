@@ -114,7 +114,7 @@ public class CharacterControllerTests : ZenjectUnitTestFixture
 
     private float GetXByHorizontal(int horizontalValue)
     {
-        return horizontalValue * characterController.moveSpeed;
+        return horizontalValue * characterController.MoveSpeed;
     }
 
     private void GivenDeltaTime(int deltaTime)

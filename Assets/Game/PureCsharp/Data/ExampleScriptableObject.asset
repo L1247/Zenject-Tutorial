@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exampleMonoInstaller:
     characterPrefab: {fileID: 7088054290076037231, guid: de6d2c50cdf103941a87e22954c50ee7, type: 3}
+  moveSpeed: 5

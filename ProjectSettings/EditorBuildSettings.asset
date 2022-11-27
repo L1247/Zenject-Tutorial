@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Game/PureCsharp/Scene/MenuScene.unity
+    guid: 4595edf2a6f4f2c49945e512eb53aa91
+  - enabled: 1
     path: Assets/Game/PureCsharp/Scene/TestScene.unity
     guid: b7be6a0e9837b494281566e6c4260d20
   - enabled: 1

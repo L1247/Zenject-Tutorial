@@ -1,18 +1,20 @@
 using System.Collections;
 using NUnit.Framework;
 using PureCsharp.Core;
+using UnityEngine;
 using UnityEngine.TestTools;
 using Zenject;
 
-public class LoadSceneTests: SceneTestFixture
+public class LoadSceneTests : SceneTestFixture
 {
-    // A UnityTest behaves like a coroutine in PlayMode
-    // and allows you to yield null to skip a frame in EditMode
     [UnityTest]
     public IEnumerator LoadSceneTestsWithEnumeratorPasses()
     {
+        StaticContext.Container.BindInstance(999f).WithId("MoveSpeed");
         yield return LoadScene("ExampleScene");
         var character = SceneContainer.Resolve<ICharacter>();
-        Assert.AreEqual(CharacterState.Idle , character.State);
+        // Assert.AreEqual(CharacterState.Idle , character.State);
+        Assert.AreEqual(999f ,                 character.MoveSpeed);
+        // character.HorizontalMove(1);
     }
 }

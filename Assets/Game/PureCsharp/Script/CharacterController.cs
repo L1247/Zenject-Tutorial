@@ -16,6 +16,9 @@ namespace PureCsharp.Core
         void Walk(int horizontalValue);
 
     #endregion
+
+        float MoveSpeed { get; }
+        void  HorizontalMove(int horizontalValue);
     }
 
     public interface ICharacter : IMove
@@ -36,12 +39,13 @@ namespace PureCsharp.Core
     {
     #region Public Variables
 
-        public readonly float moveSpeed = 5;
-
         public readonly int defaultDashFrame = 5;
 
         public CharacterState State { get; private set; }
 
+        [Inject(Id = "MoveSpeed")]
+        public float MoveSpeed { get; private set; }
+        
     #endregion
 
     #region Private Variables
@@ -68,8 +72,9 @@ namespace PureCsharp.Core
 
         public void HorizontalMove(int horizontalValue)
         {
+            Debug.Log($"{MoveSpeed}");
             var deltaTime   = timeSystem.GetDeltaTime();
-            var newPosition = Vector3.right * (horizontalValue * deltaTime) * moveSpeed;
+            var newPosition = Vector3.right * (horizontalValue * deltaTime) * MoveSpeed;
             mainCharacter.position += newPosition;
         }
 
