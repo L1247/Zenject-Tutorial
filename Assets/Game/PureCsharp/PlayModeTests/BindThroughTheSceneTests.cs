@@ -1,20 +1,25 @@
+#region
+
 using System.Collections;
 using NUnit.Framework;
 using PureCsharp.Core;
-using UnityEngine;
 using UnityEngine.TestTools;
 using Zenject;
 
-public class LoadSceneTests : SceneTestFixture
+#endregion
+
+public class BindThroughTheSceneTests : SceneTestFixture
 {
+#region Public Methods
+
     [UnityTest]
-    public IEnumerator LoadSceneTestsWithEnumeratorPasses()
+    public IEnumerator Pass_Argument_For_Character()
     {
         StaticContext.Container.BindInstance(999f).WithId("MoveSpeed");
         yield return LoadScene("ExampleScene");
         var character = SceneContainer.Resolve<ICharacter>();
-        // Assert.AreEqual(CharacterState.Idle , character.State);
-        Assert.AreEqual(999f ,                 character.MoveSpeed);
-        // character.HorizontalMove(1);
+        Assert.AreEqual(999f , character.MoveSpeed);
     }
+
+#endregion
 }
