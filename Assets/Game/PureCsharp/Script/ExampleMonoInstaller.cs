@@ -14,14 +14,22 @@ public class ExampleMonoInstaller : MonoInstaller
     [Inject]
     private Setting setting;
 
+    [Inject]
+    private IAMDontDestroy iamDontDestroy;
+
+    [Inject]
+    private ZenjectSceneLoader sceneLoader;
+
 #endregion
 
 #region Public Methods
 
     public override void InstallBindings()
     {
+        iamDontDestroy.Log();
         Container.Bind<Transform>().WithId("MainPlayer").FromComponentInNewPrefab(setting.characterPrefab).AsSingle();
         ExampleInstaller.Install(Container);
+        // sceneLoader.LoadScene("MenuScene");
     }
 
 #endregion
