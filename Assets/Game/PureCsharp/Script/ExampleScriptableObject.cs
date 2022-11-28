@@ -24,7 +24,6 @@ namespace PureCsharp.Core
 
         public override void InstallBindings()
         {
-            // Debug.Log($"{Container.ResolveId<float>()}");
             Container.BindInstance(exampleMonoInstaller);
             Container.BindInstance(moveSpeed).WithId("MoveSpeed").IfNotBound();
         }
