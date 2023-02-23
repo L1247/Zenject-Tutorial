@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Game.MonsterFactory.Scripts
 {
-    public class Demon : MonoBehaviour , IEnemy
+    public class Demon : MonoBehaviour , IEnemy , IPoolable<IMemoryPool>
     {
     #region Public Methods
 
@@ -16,6 +16,9 @@ namespace Game.MonsterFactory.Scripts
         {
             Debug.Log($"{randomValue.Value}");
         }
+
+        public void OnDespawned()             { }
+        public void OnSpawned(IMemoryPool p1) { }
 
     #endregion
 

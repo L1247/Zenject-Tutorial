@@ -1,63 +1,68 @@
-﻿using System;
+﻿#region
+
+using System;
 using UnityEngine;
+
+#endregion
 
 namespace Zenject.SpaceFighter
 {
     // Here we can add some high-level methods to give some info to other
     // parts of the codebase outside of our enemy facade
-    public class EnemyFacade : MonoBehaviour, IPoolable<float, float, IMemoryPool>, IDisposable
+    public class EnemyFacade : MonoBehaviour , IPoolable<float , float , IMemoryPool> , IDisposable
     {
-        EnemyView _view;
-        EnemyTunables _tunables;
-        EnemyDeathHandler _deathHandler;
-        EnemyStateManager _stateManager;
-        EnemyRegistry _registry;
-        IMemoryPool _pool;
+    #region Public Variables
 
-        [Inject]
-        public void Construct(
-            EnemyView view,
-            EnemyTunables tunables,
-            EnemyDeathHandler deathHandler,
-            EnemyStateManager stateManager,
-            EnemyRegistry registry)
-        {
-            _view = view;
-            _tunables = tunables;
-            _deathHandler = deathHandler;
-            _stateManager = stateManager;
-            _registry = registry;
-        }
+        public EnemyStates State => _stateManager.CurrentState;
 
-        public EnemyStates State
-        {
-            get { return _stateManager.CurrentState; }
-        }
+        public float Accuracy => _tunables.Accuracy;
 
-        public float Accuracy
-        {
-            get { return _tunables.Accuracy; }
-        }
-
-        public float Speed
-        {
-            get { return _tunables.Speed; }
-        }
+        public float Speed => _tunables.Speed;
 
         public Vector3 Position
         {
-            get { return _view.Position; }
-            set { _view.Position = value; }
+            get => _view.Position;
+            set => _view.Position = value;
         }
 
-        public void Dispose()
+    #endregion
+
+    #region Private Variables
+
+        private EnemyView     _view;
+        private EnemyTunables _tunables;
+        EnemyDeathHandler     _deathHandler;
+        EnemyStateManager     _stateManager;
+        private EnemyRegistry _registry;
+        private IMemoryPool   _pool;
+
+    #endregion
+
+    #region Public Methods
+
+        [Inject]
+        public void Construct(
+                EnemyView         view ,
+                EnemyTunables     tunables ,
+                EnemyDeathHandler deathHandler ,
+                EnemyStateManager stateManager ,
+                EnemyRegistry     registry)
         {
-            _pool.Despawn(this);
+            _view         = view;
+            _tunables     = tunables;
+            _deathHandler = deathHandler;
+            _stateManager = stateManager;
+            _registry     = registry;
         }
 
         public void Die()
         {
             _deathHandler.Die();
+        }
+
+        public void Dispose()
+        {
+            _pool.Despawn(this);
         }
 
         public void OnDespawned()
@@ -66,17 +71,21 @@ namespace Zenject.SpaceFighter
             _pool = null;
         }
 
-        public void OnSpawned(float accuracy, float speed, IMemoryPool pool)
+        public void OnSpawned(float accuracy , float speed , IMemoryPool pool)
         {
-            _pool = pool;
+            _pool              = pool;
             _tunables.Accuracy = accuracy;
-            _tunables.Speed = speed;
+            _tunables.Speed    = speed;
 
             _registry.AddEnemy(this);
         }
 
-        public class Factory : PlaceholderFactory<float, float, EnemyFacade>
-        {
-        }
+    #endregion
+
+    #region Nested Types
+
+        public class Factory : PlaceholderFactory<float , float , EnemyFacade> { }
+
+    #endregion
     }
 }

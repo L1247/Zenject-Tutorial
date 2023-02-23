@@ -12,8 +12,8 @@ namespace Game.MonsterFactory.Scripts
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<GameController>().AsSingle();
             Container.Bind<Player>().AsSingle();
+            Container.BindInterfacesTo<GameController>().AsSingle();
             Container.Bind<RandomValue>().AsTransient();
             Container.Bind<DifficultyManager>().AsSingle();
             Container.BindFactory<IEnemy , EnemyFactory>().FromFactory<CustomEnemyFactory>();
