@@ -27,13 +27,4 @@ namespace Game.Pool.Scripts
     }
 
     internal class MonsterPool : MonoPoolableMemoryPool<MonsterData , IMemoryPool , Monster> { }
-
-    public class MonsterInstaller : Installer<MonsterInstaller>
-    {
-    #region Public Methods
-
-        public override void InstallBindings() { }
-
-    #endregion
-    }
 }

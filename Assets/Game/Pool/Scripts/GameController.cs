@@ -49,7 +49,7 @@ namespace Game.Pool.Scripts
 
         private void CreateMonster()
         {
-            var monsterData = new MonsterData(Random.Range(1 , 4));
+            var monsterData = new MonsterData(Random.Range(1 , 3));
             var monster     = monsterFactory.Create(monsterData);
             monsters.Add(monster);
         }

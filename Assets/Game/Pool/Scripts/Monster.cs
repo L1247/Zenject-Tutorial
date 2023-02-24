@@ -12,29 +12,25 @@ namespace Game.Pool.Scripts
     {
     #region Private Variables
 
-        private IMemoryPool         pool;
-        private MonsterNameProvider monsterNameProvider;
+        private IMemoryPool          pool;
+        private MonsterNameProvider  monsterNameProvider;
+        private StateMachineProvider stateMachineProvider;
 
     #endregion
 
     #region Public Methods
 
         [Inject]
-        public void Construct(MonsterNameProvider monsterNameProvider)
+        public void Construct(MonsterNameProvider monsterNameProvider , StateMachineProvider stateMachineProvider)
         {
-            this.monsterNameProvider = monsterNameProvider;
+            this.stateMachineProvider = stateMachineProvider;
+            this.monsterNameProvider  = monsterNameProvider;
             Debug.Log("Construct");
         }
 
         public void Dispose()
         {
             pool.Despawn(this);
-        }
-
-        public void Init(int monsterType)
-        {
-            Debug.Log($"{monsterType}");
-            gameObject.name = monsterNameProvider.GetName(monsterType);
         }
 
         public void OnDespawned()
@@ -48,6 +44,18 @@ namespace Game.Pool.Scripts
             this.pool = pool;
             var monsterType = monsterData.Type;
             Init(monsterType);
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private void Init(int monsterType)
+        {
+            Debug.Log($"init: monsterType - {monsterType}");
+            gameObject.name = monsterNameProvider.GetName(monsterType);
+            var stateMachine = stateMachineProvider.GetFSM(monsterType);
+            Debug.Log($"init: {stateMachine}");
         }
 
     #endregion
