@@ -1,6 +1,7 @@
 #region
 
 using UnityEngine;
+using Zenject;
 
 #endregion
 
@@ -14,6 +15,12 @@ namespace Game.Pool.Scripts
         {
             Debug.Log($"state2: {monster}");
         }
+
+    #endregion
+
+    #region Nested Types
+
+        public class Factory : PlaceholderFactory<State2> { }
 
     #endregion
     }

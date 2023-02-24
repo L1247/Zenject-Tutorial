@@ -12,19 +12,19 @@ namespace Game.Pool.Scripts
     {
     #region Private Variables
 
-        private IMemoryPool          pool;
-        private MonsterNameProvider  monsterNameProvider;
-        private StateMachineProvider stateMachineProvider;
+        private IMemoryPool         pool;
+        private MonsterNameProvider monsterNameProvider;
+        private StateMachineFactory stateMachineFactory;
 
     #endregion
 
     #region Public Methods
 
         [Inject]
-        public void Construct(MonsterNameProvider monsterNameProvider , StateMachineProvider stateMachineProvider)
+        public void Construct(MonsterNameProvider monsterNameProvider , StateMachineFactory stateMachineFactory)
         {
-            this.stateMachineProvider = stateMachineProvider;
-            this.monsterNameProvider  = monsterNameProvider;
+            this.stateMachineFactory = stateMachineFactory;
+            this.monsterNameProvider = monsterNameProvider;
             Debug.Log("Construct");
         }
 
@@ -54,8 +54,10 @@ namespace Game.Pool.Scripts
         {
             Debug.Log($"init: monsterType - {monsterType}");
             gameObject.name = monsterNameProvider.GetName(monsterType);
-            var stateMachine = stateMachineProvider.GetFSM(monsterType);
+            var stateMachine = stateMachineFactory.Create(monsterType);
             Debug.Log($"init: {stateMachine}");
+            var fsm = stateMachine.GetFSM();
+            Debug.Log($"{fsm}");
         }
 
     #endregion
