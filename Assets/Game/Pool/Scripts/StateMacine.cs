@@ -38,7 +38,12 @@ namespace Game.Pool.Scripts
 
         public string GetFSM()
         {
-            return $"{state1Factory.Create()} , {state2Factory.Create()}";
+            var state1 = state1Factory.Create();
+            var state2 = state2Factory.Create();
+            state1.LogDataType();
+            state2.LogDataType();
+
+            return $"{state1} , {state2}";
         }
 
     #endregion
@@ -71,7 +76,9 @@ namespace Game.Pool.Scripts
 
         public string GetFSM()
         {
-            return $"{state1Factory.Create()}";
+            var state1 = state1Factory.Create();
+            state1.LogDataType();
+            return $"{state1}";
         }
 
     #endregion

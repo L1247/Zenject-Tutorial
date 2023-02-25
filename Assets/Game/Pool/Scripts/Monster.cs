@@ -15,14 +15,17 @@ namespace Game.Pool.Scripts
         private IMemoryPool         pool;
         private MonsterNameProvider monsterNameProvider;
         private StateMachineFactory stateMachineFactory;
+        private MonsterData         monsterData;
 
     #endregion
 
     #region Public Methods
 
         [Inject]
-        public void Construct(MonsterNameProvider monsterNameProvider , StateMachineFactory stateMachineFactory)
+        public void Construct(
+                MonsterNameProvider monsterNameProvider , StateMachineFactory stateMachineFactory , MonsterData monsterData)
         {
+            this.monsterData         = monsterData;
             this.stateMachineFactory = stateMachineFactory;
             this.monsterNameProvider = monsterNameProvider;
             Debug.Log("Construct");
@@ -42,6 +45,8 @@ namespace Game.Pool.Scripts
         public void OnSpawned(MonsterData monsterData , IMemoryPool pool)
         {
             this.pool = pool;
+            this.monsterData.CloneFromThis(monsterData);
+            Debug.Log("Clone completed");
             var monsterType = monsterData.Type;
             Init(monsterType);
         }

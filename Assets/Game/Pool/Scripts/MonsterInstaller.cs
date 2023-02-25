@@ -12,6 +12,7 @@ namespace Game.Pool.Scripts
 
         public override void InstallBindings()
         {
+            Container.Bind<MonsterData>().AsSingle();
             Container.BindFactory<State1 , State1.Factory>();
             Container.BindFactory<State2 , State2.Factory>();
             Container.BindFactory<StateMachine1 , StateMachine1.Factory>();

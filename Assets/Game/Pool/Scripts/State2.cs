@@ -9,11 +9,27 @@ namespace Game.Pool.Scripts
 {
     public class State2
     {
+    #region Private Variables
+
+        private readonly MonsterData monsterData;
+
+    #endregion
+
     #region Constructor
 
-        public State2(Monster monster)
+        public State2(MonsterData monsterData)
         {
-            Debug.Log($"state2: {monster}");
+            this.monsterData = monsterData;
+            Debug.Log($"state1: {this.monsterData.Type}");
+        }
+
+    #endregion
+
+    #region Public Methods
+
+        public void LogDataType()
+        {
+            Debug.Log($"{monsterData.Type}");
         }
 
     #endregion
