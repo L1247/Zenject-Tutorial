@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Game.Pool.Scripts
 {
-    public interface IStateMachineFactory
+    public interface IStateMachineProvider
     {
     #region Public Methods
 
@@ -15,7 +15,7 @@ namespace Game.Pool.Scripts
     #endregion
     }
 
-    public class StateMachine2 : IStateMachineFactory
+    public class StateMachine2 : IStateMachineProvider
     {
     #region Private Variables
 
@@ -55,7 +55,7 @@ namespace Game.Pool.Scripts
     #endregion
     }
 
-    public class StateMachine1 : IStateMachineFactory
+    public class StateMachine1 : IStateMachineProvider
     {
     #region Private Variables
 

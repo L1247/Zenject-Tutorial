@@ -17,13 +17,15 @@ namespace Game.Pool.Scripts
             Container.BindFactory<State2 , State2.Factory>();
             Container.BindFactory<StateMachine1 , StateMachine1.Factory>();
             Container.BindFactory<StateMachine2 , StateMachine2.Factory>();
-            Container.BindFactory<int , IStateMachineFactory , StateMachineFactory>().FromFactory<CustomStateMachineFactory>();
+
+            Container.BindFactory<int , IStateMachineProvider , StateMachineProviderFactory>()
+                     .FromFactory<CustomStateMachineProviderFactory>();
         }
 
     #endregion
     }
 
-    public class CustomStateMachineFactory : IFactory<int , IStateMachineFactory>
+    public class CustomStateMachineProviderFactory : IFactory<int , IStateMachineProvider>
     {
     #region Private Variables
 
@@ -34,7 +36,8 @@ namespace Game.Pool.Scripts
 
     #region Constructor
 
-        public CustomStateMachineFactory(StateMachine1.Factory stateMachine1Factory , StateMachine2.Factory stateMachine2Factory)
+        public CustomStateMachineProviderFactory(
+                StateMachine1.Factory stateMachine1Factory , StateMachine2.Factory stateMachine2Factory)
         {
             this.stateMachine2Factory = stateMachine2Factory;
             this.stateMachine1Factory = stateMachine1Factory;
@@ -44,7 +47,7 @@ namespace Game.Pool.Scripts
 
     #region Public Methods
 
-        public IStateMachineFactory Create(int monsterType)
+        public IStateMachineProvider Create(int monsterType)
         {
             return monsterType == 1 ? stateMachine1Factory.Create() : stateMachine2Factory.Create();
         }
