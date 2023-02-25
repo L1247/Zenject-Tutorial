@@ -45,7 +45,7 @@ namespace Game.Pool.Scripts
         public void OnSpawned(MonsterData monsterData , IMemoryPool pool)
         {
             this.pool = pool;
-            this.monsterData.CloneFromThis(monsterData);
+            this.monsterData.CopyPropertiesFromThis(monsterData);
             Debug.Log("Clone completed");
             var monsterType = monsterData.Type;
             Init(monsterType);

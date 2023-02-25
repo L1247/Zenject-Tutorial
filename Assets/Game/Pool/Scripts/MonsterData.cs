@@ -21,7 +21,7 @@ namespace Game.Pool.Scripts
 
     #region Public Methods
 
-        public void CloneFromThis(MonsterData monsterData)
+        public void CopyPropertiesFromThis(MonsterData monsterData)
         {
             Type = monsterData.Type;
         }
