@@ -59,13 +59,13 @@ namespace Game.Pool.Scripts
     {
     #region Private Variables
 
-        private readonly IFactory<State1> state1Factory;
+        private readonly State1.Factory state1Factory;
 
     #endregion
 
     #region Constructor
 
-        public StateMachine1(IFactory<State1> state1Factory)
+        public StateMachine1(State1.Factory state1Factory)
         {
             this.state1Factory = state1Factory;
         }
