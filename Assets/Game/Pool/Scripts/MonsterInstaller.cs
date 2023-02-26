@@ -18,6 +18,7 @@ namespace Game.Pool.Scripts
             Container.BindFactory<StateMachine1 , StateMachine1.Factory>();
             Container.BindFactory<StateMachine2 , StateMachine2.Factory>();
 
+            Container.Bind<IFSMProvider>().To<FSMProvider>().AsSingle();
             Container.BindFactory<int , IStateMachineProvider , StateMachineProviderFactory>()
                      .FromFactory<CustomStateMachineProviderFactory>();
         }

@@ -1,5 +1,6 @@
 #region
 
+using NSubstitute;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -14,8 +15,9 @@ namespace Game.Pool.Scripts.Tests
         [Test]
         public void CreateMonsterType1()
         {
-            var monster = new GameObject().AddComponent<Monster>();
-            monster.Construct(new MonsterNameProvider() , new StateMachineProviderFactory() , new MonsterData());
+            var monster     = new GameObject().AddComponent<Monster>();
+            var fsmProvider = Substitute.For<IFSMProvider>();
+            monster.Construct(new MonsterNameProvider() , fsmProvider , new MonsterData());
             monster.Init(1);
         }
 

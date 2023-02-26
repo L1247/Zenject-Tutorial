@@ -16,19 +16,18 @@ namespace Game.Pool.Scripts
         private StateMachineProviderFactory stateMachineProviderFactory;
         private MonsterNameProvider         monsterNameProvider;
         private MonsterData                 monsterData;
+        private IFSMProvider                fsmProvider;
 
     #endregion
 
     #region Public Methods
 
         [Inject]
-        public void Construct(
-                MonsterNameProvider monsterNameProvider , StateMachineProviderFactory stateMachineProviderFactory ,
-                MonsterData         monsterData)
+        public void Construct(MonsterNameProvider monsterNameProvider , IFSMProvider fsmProvider , MonsterData monsterData)
         {
-            this.monsterData                 = monsterData;
-            this.stateMachineProviderFactory = stateMachineProviderFactory;
-            this.monsterNameProvider         = monsterNameProvider;
+            this.fsmProvider         = fsmProvider;
+            this.monsterData         = monsterData;
+            this.monsterNameProvider = monsterNameProvider;
             Debug.Log("Construct");
         }
 
@@ -41,9 +40,7 @@ namespace Game.Pool.Scripts
         {
             Debug.Log($"init: monsterType - {monsterType}");
             gameObject.name = monsterNameProvider.GetName(monsterType);
-            var stateMachine = stateMachineProviderFactory.Create(monsterType);
-            Debug.Log($"init: {stateMachine}");
-            var fsm = stateMachine.GetFSM();
+            var fsm = fsmProvider.GetFsm(monsterType);
             Debug.Log($"{fsm}");
         }
 
