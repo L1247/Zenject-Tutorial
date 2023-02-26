@@ -17,6 +17,7 @@ namespace Game.Pool.Scripts
         private MonsterNameProvider         monsterNameProvider;
         private MonsterData                 monsterData;
         private IFSMProvider                fsmProvider;
+        private string                      fsm;
 
     #endregion
 
@@ -36,11 +37,16 @@ namespace Game.Pool.Scripts
             pool.Despawn(this);
         }
 
+        public bool HasState(string stateName)
+        {
+            return fsm == stateName;
+        }
+
         public void Init(int monsterType)
         {
             Debug.Log($"init: monsterType - {monsterType}");
             gameObject.name = monsterNameProvider.GetName(monsterType);
-            var fsm = fsmProvider.GetFsm(monsterType);
+            fsm             = fsmProvider.GetFsm(monsterType);
             Debug.Log($"{fsm}");
         }
 

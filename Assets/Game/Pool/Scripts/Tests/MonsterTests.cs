@@ -17,8 +17,10 @@ namespace Game.Pool.Scripts.Tests
         {
             var monster     = new GameObject().AddComponent<Monster>();
             var fsmProvider = Substitute.For<IFSMProvider>();
+            fsmProvider.GetFsm(1).Returns("123");
             monster.Construct(new MonsterNameProvider() , fsmProvider , new MonsterData());
             monster.Init(1);
+            Assert.AreEqual(true , monster.HasState("123"));
         }
 
     #endregion
