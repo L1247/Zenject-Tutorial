@@ -46,7 +46,9 @@ namespace Game.Pool.Scripts
         {
             Debug.Log($"init: monsterType - {monsterType}");
             gameObject.name = monsterNameProvider.GetName(monsterType);
-            fsm             = fsmProvider.GetFsm(monsterType);
+            var stateMachineProvider = fsmProvider.GetFsm(monsterType);
+            Debug.Log($"{stateMachineProvider}");
+            fsm = stateMachineProvider.GetFSM();
             Debug.Log($"{fsm}");
         }
 

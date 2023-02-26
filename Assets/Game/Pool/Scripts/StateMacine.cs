@@ -21,6 +21,8 @@ namespace Game.Pool.Scripts
 
         private readonly State1.Factory state1Factory;
         private readonly State2.Factory state2Factory;
+        private readonly State1         state1;
+        private readonly State2         state2;
 
     #endregion
 
@@ -32,18 +34,24 @@ namespace Game.Pool.Scripts
             this.state1Factory = state1Factory;
         }
 
+        public StateMachine2(State1 state1 , State2 state2)
+        {
+            this.state2 = state2;
+            this.state1 = state1;
+        }
+
     #endregion
 
     #region Public Methods
 
         public string GetFSM()
         {
-            var state1 = state1Factory.Create();
-            var state2 = state2Factory.Create();
+            var state1 = this.state1 ?? state1Factory.Create();
+            var state2 = this.state2 ?? state2Factory.Create();
             state1.LogDataType();
             state2.LogDataType();
 
-            return $"{state1} , {state2}";
+            return nameof(state1) + nameof(state2);
         }
 
     #endregion
@@ -60,6 +68,7 @@ namespace Game.Pool.Scripts
     #region Private Variables
 
         private readonly State1.Factory state1Factory;
+        private readonly State1         state1;
 
     #endregion
 
@@ -70,15 +79,20 @@ namespace Game.Pool.Scripts
             this.state1Factory = state1Factory;
         }
 
+        public StateMachine1(State1 state1)
+        {
+            this.state1 = state1;
+        }
+
     #endregion
 
     #region Public Methods
 
         public string GetFSM()
         {
-            var state1 = state1Factory.Create();
+            var state1 = this.state1 ?? state1Factory.Create();
             state1.LogDataType();
-            return $"{state1}";
+            return nameof(state1);
         }
 
     #endregion

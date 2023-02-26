@@ -4,7 +4,7 @@ namespace Game.Pool.Scripts
     {
     #region Public Methods
 
-        string GetFsm(int monsterType);
+        IStateMachineProvider GetFsm(int monsterType);
 
     #endregion
     }
@@ -28,10 +28,10 @@ namespace Game.Pool.Scripts
 
     #region Public Methods
 
-        public string GetFsm(int monsterType)
+        public IStateMachineProvider GetFsm(int monsterType)
         {
             var stateMachine = stateMachineProviderFactory.Create(monsterType);
-            return stateMachine.GetFSM();
+            return stateMachine;
         }
 
     #endregion
