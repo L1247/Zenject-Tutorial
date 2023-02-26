@@ -37,6 +37,16 @@ namespace Game.Pool.Scripts
             pool.Despawn(this);
         }
 
+        public void Init(int monsterType)
+        {
+            Debug.Log($"init: monsterType - {monsterType}");
+            gameObject.name = monsterNameProvider.GetName(monsterType);
+            var stateMachine = stateMachineProviderFactory.Create(monsterType);
+            Debug.Log($"init: {stateMachine}");
+            var fsm = stateMachine.GetFSM();
+            Debug.Log($"{fsm}");
+        }
+
         public void OnDespawned()
         {
             pool            = null;
@@ -50,20 +60,6 @@ namespace Game.Pool.Scripts
             Debug.Log("Clone completed");
             var monsterType = monsterData.Type;
             Init(monsterType);
-        }
-
-    #endregion
-
-    #region Private Methods
-
-        private void Init(int monsterType)
-        {
-            Debug.Log($"init: monsterType - {monsterType}");
-            gameObject.name = monsterNameProvider.GetName(monsterType);
-            var stateMachine = stateMachineProviderFactory.CreateProvider(monsterType);
-            Debug.Log($"init: {stateMachine}");
-            var fsm = stateMachine.GetFSM();
-            Debug.Log($"{fsm}");
         }
 
     #endregion
