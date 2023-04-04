@@ -9,16 +9,20 @@ namespace PureCsharp.Core
 {
     public interface IMove
     {
+    #region Public Variables
+
+        float MoveSpeed { get; }
+
+    #endregion
+
     #region Public Methods
 
-        void Dash(int value);
+        void Dash(int           value);
+        void HorizontalMove(int horizontalValue);
 
         void Walk(int horizontalValue);
 
     #endregion
-
-        float MoveSpeed { get; }
-        void  HorizontalMove(int horizontalValue);
     }
 
     public interface ICharacter : IMove
@@ -43,9 +47,9 @@ namespace PureCsharp.Core
 
         public CharacterState State { get; private set; }
 
-        [Inject(Id = "MoveSpeed")]
+        [Inject(Id = "MoveSpeed" , Optional = true)]
         public float MoveSpeed { get; private set; }
-        
+
     #endregion
 
     #region Private Variables
