@@ -11,17 +11,17 @@ namespace Game.MonsterFactory.Scripts
     {
     #region Private Variables
 
-        private readonly EnemyFactory enemyFactory;
+        // private readonly EnemyFactory enemyFactory;
 
-        // private readonly IEnemyFactory  enemyFactory;
+        private readonly IEnemyFactory     enemyFactory;
         private readonly DifficultyManager difficultyManager;
 
     #endregion
 
     #region Constructor
 
-        public GameController(EnemyFactory enemyFactory , DifficultyManager difficultyManager)
-                // public GameController(IEnemyFactory enemyFactory , DifficultyManager difficultyManager)
+        // public GameController(EnemyFactory enemyFactory , DifficultyManager difficultyManager)
+        public GameController(IEnemyFactory enemyFactory , DifficultyManager difficultyManager)
         {
             this.enemyFactory      = enemyFactory;
             this.difficultyManager = difficultyManager;

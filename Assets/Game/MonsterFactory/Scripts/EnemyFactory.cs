@@ -6,5 +6,5 @@ using Zenject;
 
 namespace Game.MonsterFactory.Scripts
 {
-    public class EnemyFactory : PlaceholderFactory<IEnemy> { }
+    public class EnemyFactory : PlaceholderFactory<IEnemy> , IEnemyFactory { }
 }

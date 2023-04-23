@@ -17,12 +17,10 @@ namespace Game.MonsterFactory.Scripts
             Container.Bind<RandomValue>().AsTransient();
             Container.Bind<DifficultyManager>().AsSingle();
 
-            Container.BindFactory<IEnemy , EnemyFactory>().FromFactory<CustomEnemyFactory>();
+            // Container.BindFactory<IEnemy , EnemyFactory>().FromFactory<CustomEnemyFactory>();
+            Container.BindFactoryCustomInterface<IEnemy , EnemyFactory , IEnemyFactory>().FromFactory<CustomEnemyFactory>();
             Container.BindFactory<Dog , Dog.Factory>().FromComponentInNewPrefabResource("Dog");
             Container.BindFactory<Demon , Demon.Factory>().FromComponentInNewPrefabResource("Demon");
-
-            // FactoryCustomInterface
-            // Container.BindFactoryCustomInterface<Dog , Dog.Factory , IEnemyFactory>().FromComponentInNewPrefabResource("Dog");
         }
 
     #endregion

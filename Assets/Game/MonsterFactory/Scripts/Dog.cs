@@ -21,9 +21,7 @@ namespace Game.MonsterFactory.Scripts
 
     #region Nested Types
 
-        public class Factory : PlaceholderFactory<Dog>
-                // public class Factory : PlaceholderFactory<Dog> , IDogFactory
-        { }
+        public class Factory : PlaceholderFactory<Dog> { }
 
     #endregion
     }
