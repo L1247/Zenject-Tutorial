@@ -11,7 +11,9 @@ namespace Game.MonsterFactory.Scripts
     {
     #region Private Variables
 
-        private readonly EnemyFactory      _enemyFactory;
+        private readonly EnemyFactory enemyFactory;
+
+        // private readonly IEnemyFactory  enemyFactory;
         private readonly DifficultyManager difficultyManager;
 
     #endregion
@@ -19,8 +21,9 @@ namespace Game.MonsterFactory.Scripts
     #region Constructor
 
         public GameController(EnemyFactory enemyFactory , DifficultyManager difficultyManager)
+                // public GameController(IEnemyFactory enemyFactory , DifficultyManager difficultyManager)
         {
-            _enemyFactory          = enemyFactory;
+            this.enemyFactory      = enemyFactory;
             this.difficultyManager = difficultyManager;
         }
 
@@ -30,7 +33,7 @@ namespace Game.MonsterFactory.Scripts
 
         public void Initialize()
         {
-            var enemy = _enemyFactory.Create();
+            var enemy = enemyFactory.Create();
             Debug.Log($"{enemy}");
             // ...
         }
@@ -41,7 +44,7 @@ namespace Game.MonsterFactory.Scripts
             {
                 var difficulty = difficultyManager.Difficulty;
                 difficultyManager.Difficulty = difficulty == Difficulties.Easy ? Difficulties.Hard : Difficulties.Easy;
-                var enemy = _enemyFactory.Create();
+                var enemy = enemyFactory.Create();
                 Debug.Log($"{enemy}");
             }
         }

@@ -21,7 +21,7 @@ namespace PureCsharp.Core
         public override void InstallBindings()
         {
             Application.targetFrameRate = 60;
-            Debug.Log("ProjectInstaller");
+            // Debug.Log("ProjectInstaller");
             Container.Bind<IAMDontDestroy>().FromComponentsInNewPrefab(iamDontDestroyPrefab).AsSingle().NonLazy();
 
             // var iamDontDestroy = Container.InstantiatePrefabForComponent<IAMDontDestroy>(iamDontDestroyPrefab);

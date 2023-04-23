@@ -12,7 +12,7 @@ namespace PureCsharp.Core
 
         private void Awake()
         {
-            Debug.Log("Awake: IAMDontDestroy");
+            // Debug.Log("Awake: IAMDontDestroy");
         }
 
     #endregion

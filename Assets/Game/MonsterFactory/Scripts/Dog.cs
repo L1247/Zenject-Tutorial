@@ -12,16 +12,15 @@ namespace Game.MonsterFactory.Scripts
     #region Public Methods
 
         [Inject]
-        public void Construct(Player player)
-        {
-            Debug.Log($"{player is not null}");
-        }
+        public void Construct(Player player) { }
 
     #endregion
 
     #region Nested Types
 
-        public class Factory : PlaceholderFactory<Dog> { }
+        public class Factory : PlaceholderFactory<Dog>
+                // public class Factory : PlaceholderFactory<Dog> , IDogFactory
+        { }
 
     #endregion
     }

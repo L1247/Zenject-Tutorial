@@ -1,67 +1,72 @@
+#region
+
 using UnityEngine;
+
+#endregion
 
 namespace Zenject.SpaceFighter
 {
     public class Player
     {
-        readonly Rigidbody _rigidBody;
-        readonly MeshRenderer _renderer;
+    #region Public Variables
 
-        float _health = 100.0f;
+        public bool IsDead { get; set; }
 
-        public Player(
-            Rigidbody rigidBody,
-            MeshRenderer renderer)
-        {
-            _rigidBody = rigidBody;
-            _renderer = renderer;
-        }
+        public float Health => _health;
 
-        public MeshRenderer Renderer
-        {
-            get { return _renderer; }
-        }
-
-        public bool IsDead
-        {
-            get; set;
-        }
-
-        public float Health
-        {
-            get { return _health; }
-        }
-
-        public Vector3 LookDir
-        {
-            get { return -_rigidBody.transform.right; }
-        }
+        public MeshRenderer Renderer => _renderer;
 
         public Quaternion Rotation
         {
-            get { return _rigidBody.rotation; }
-            set { _rigidBody.rotation = value; }
+            get => _rigidBody.rotation;
+            set => _rigidBody.rotation = value;
         }
+
+        public Vector3 LookDir => -_rigidBody.transform.right;
 
         public Vector3 Position
         {
-            get { return _rigidBody.position; }
-            set { _rigidBody.position = value; }
+            get => _rigidBody.position;
+            set => _rigidBody.position = value;
         }
 
-        public Vector3 Velocity
+        public Vector3 Velocity => _rigidBody.velocity;
+
+    #endregion
+
+    #region Private Variables
+
+        private readonly Rigidbody    _rigidBody;
+        readonly         MeshRenderer _renderer;
+
+        float _health = 100.0f;
+
+    #endregion
+
+    #region Constructor
+
+        public Player(
+                Rigidbody    rigidBody ,
+                MeshRenderer renderer)
         {
-            get { return _rigidBody.velocity; }
+            _rigidBody = rigidBody;
+            _renderer  = renderer;
         }
 
-        public void TakeDamage(float healthLoss)
-        {
-            _health = Mathf.Max(0.0f, _health - healthLoss);
-        }
+    #endregion
+
+    #region Public Methods
 
         public void AddForce(Vector3 force)
         {
             _rigidBody.AddForce(force);
         }
+
+        public void TakeDamage(float healthLoss)
+        {
+            _health = Mathf.Max(0.0f , _health - healthLoss);
+        }
+
+    #endregion
     }
 }

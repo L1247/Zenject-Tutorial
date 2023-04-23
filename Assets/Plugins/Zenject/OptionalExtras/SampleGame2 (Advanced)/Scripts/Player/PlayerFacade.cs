@@ -1,37 +1,44 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEngine;
+
+#endregion
 
 namespace Zenject.SpaceFighter
 {
     public class PlayerFacade : MonoBehaviour
     {
-        Player _model;
+    #region Public Variables
+
+        public bool IsDead => _model.IsDead;
+
+        public Quaternion Rotation => _model.Rotation;
+
+        public Vector3 Position => _model.Position;
+
+    #endregion
+
+    #region Private Variables
+
+        private Player      _model;
         PlayerDamageHandler _hitHandler;
 
+    #endregion
+
+    #region Public Methods
+
         [Inject]
-        public void Construct(Player player, PlayerDamageHandler hitHandler)
+        public void Construct(Player player , PlayerDamageHandler hitHandler)
         {
-            _model = player;
+            _model      = player;
             _hitHandler = hitHandler;
-        }
-
-        public bool IsDead
-        {
-            get { return _model.IsDead; }
-        }
-
-        public Vector3 Position
-        {
-            get { return _model.Position; }
-        }
-
-        public Quaternion Rotation
-        {
-            get { return _model.Rotation; }
         }
 
         public void TakeDamage(Vector3 moveDirection)
         {
             _hitHandler.TakeDamage(moveDirection);
         }
+
+    #endregion
     }
 }
