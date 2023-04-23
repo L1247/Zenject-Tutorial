@@ -34,9 +34,10 @@ namespace Game.MonsterFactory.Scripts
 
         public IEnemy Create()
         {
-            return _difficultyManager.Difficulty == Difficulties.Hard
-                    ? dogFactory.Create()
-                    : demonFactory.Create();
+            IEnemy enemy = _difficultyManager.Difficulty == Difficulties.Hard
+                    ? demonFactory.Create()
+                    : dogFactory.Create();
+            return enemy;
         }
 
         public void Validate()

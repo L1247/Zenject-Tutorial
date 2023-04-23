@@ -14,7 +14,8 @@ namespace Game.MonsterFactory.Scripts
         [Inject]
         public void Construct(RandomValue randomValue)
         {
-            Debug.Log($"{randomValue.Value}");
+            Debug.Log($"RandomValue: {randomValue.Value}");
+            transform.position = Random.insideUnitCircle * 3;
         }
 
         public void OnDespawned()             { }

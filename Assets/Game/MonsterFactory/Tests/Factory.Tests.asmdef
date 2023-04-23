@@ -1,0 +1,18 @@
+{
+  "name": "Factory.Tests",
+  "rootNamespace": "",
+  "references": [
+    "GUID:bf2b48b370c1c3540b3008566dafb451"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

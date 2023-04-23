@@ -33,7 +33,7 @@ namespace Game.MonsterFactory.Scripts
 
         public void Initialize()
         {
-            var enemy = enemyFactory.Create();
+            var enemy = CreateEnemy();
             Debug.Log($"{enemy}");
             // ...
         }
@@ -42,11 +42,22 @@ namespace Game.MonsterFactory.Scripts
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                var difficulty = difficultyManager.Difficulty;
-                difficultyManager.Difficulty = difficulty == Difficulties.Easy ? Difficulties.Hard : Difficulties.Easy;
-                var enemy = enemyFactory.Create();
+                var enemy = CreateEnemy();
                 Debug.Log($"{enemy}");
             }
+        }
+
+    #endregion
+
+    #region Private Methods
+
+        private IEnemy CreateEnemy()
+        {
+            var difficulty = difficultyManager.Difficulty;
+            difficultyManager.Difficulty = difficulty == Difficulties.Easy ? Difficulties.Hard : Difficulties.Easy;
+            Debug.Log($"Current difficulty: {difficultyManager.Difficulty}");
+            var enemy = enemyFactory.Create();
+            return enemy;
         }
 
     #endregion
