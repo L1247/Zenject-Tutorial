@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Game.MonsterFactory.Scripts
 {
-    public class CustomEnemyFactory : IValidatable , IFactory<IEnemy>
+    public class CustomEnemyFactory : PlaceholderFactory<IEnemy> , IValidatable , IEnemyFactory
             // FactoryCustomInterface
             // public class CustomEnemyFactory : EnemyFactory , IValidatable 
     {
@@ -32,7 +32,7 @@ namespace Game.MonsterFactory.Scripts
 
     #region Public Methods
 
-        public IEnemy Create()
+        public override IEnemy Create()
         {
             IEnemy enemy = _difficultyManager.Difficulty == Difficulties.Hard
                     ? demonFactory.Create()

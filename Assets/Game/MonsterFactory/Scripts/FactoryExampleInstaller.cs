@@ -18,7 +18,8 @@ namespace Game.MonsterFactory.Scripts
             Container.Bind<DifficultyManager>().AsSingle();
 
             // Container.BindFactory<IEnemy , EnemyFactory>().FromFactory<CustomEnemyFactory>();
-            Container.BindFactoryCustomInterface<IEnemy , EnemyFactory , IEnemyFactory>().FromFactory<CustomEnemyFactory>();
+            // use customEnemyFactory for ConCreate factory type , instead EnemyFactory
+            Container.BindFactoryCustomInterface<IEnemy , CustomEnemyFactory , IEnemyFactory>().FromFactory<CustomEnemyFactory>();
             Container.BindFactory<Dog , Dog.Factory>().FromComponentInNewPrefabResource("Dog");
             Container.BindFactory<Demon , Demon.Factory>().FromComponentInNewPrefabResource("Demon");
         }
