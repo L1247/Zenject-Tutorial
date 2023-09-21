@@ -33,7 +33,7 @@ public class GameControllerTests
         diContainer.Bind<DifficultyManager>().AsSingle();
         diContainer.BindFactoryCustomInterface<IEnemy , CustomEnemyFactory , IEnemyFactory>().FromFactory<CustomEnemyFactory>();
         diContainer.BindFactory<Dog , Dog.Factory>().FromComponentInNewPrefabResource("Dog");
-        diContainer.BindFactory<int,Demon , Demon.Factory>().FromComponentInNewPrefabResource("Demon");
+        diContainer.BindFactory<int , Demon , Demon.Factory>().FromComponentInNewPrefabResource("Demon");
 
         var gameController = diContainer.Resolve<GameController>();
         gameController.Initialize();
