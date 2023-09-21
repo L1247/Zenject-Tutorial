@@ -13,14 +13,15 @@ namespace Game.Decorate.Scripts
 
         public override void InstallBindings()
         {
-            // Container.Bind<IEnemyStats>().To<OrcStats>().AsSingle();
-            // Container.Decorate<IEnemyStats>().With<WeaponUpgradeEnemyDecorator>();
+            Debug.Log($"DecorateExampleInstaller");
+            Container.Bind<IEnemyStats>().To<OrcStats>().AsSingle();
+            Container.Decorate<IEnemyStats>().With<WeaponUpgradeEnemyDecorator>();
             // Container.Bind<Player>().AsSingle().NonLazy();
             // Container.Bind<A>().AsSingle().Lazy();
             // Container.Bind<B>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<A>().AsSingle();
-            Container.BindInterfacesAndSelfTo<B>().AsSingle();
-            Container.BindExecutionOrder<B>(-1);
+            // Container.BindInterfacesAndSelfTo<A>().AsSingle();
+            // Container.BindInterfacesAndSelfTo<B>().AsSingle();
+            // Container.BindExecutionOrder<B>(-1);
         }
 
     #endregion

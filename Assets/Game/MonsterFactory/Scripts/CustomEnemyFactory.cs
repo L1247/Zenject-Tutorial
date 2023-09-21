@@ -35,7 +35,7 @@ namespace Game.MonsterFactory.Scripts
         public override IEnemy Create()
         {
             IEnemy enemy = _difficultyManager.Difficulty == Difficulties.Hard
-                    ? demonFactory.Create()
+                    ? demonFactory.Create(1)
                     : dogFactory.Create();
             return enemy;
         }
@@ -44,7 +44,7 @@ namespace Game.MonsterFactory.Scripts
         {
             Debug.Log("Validate Factory");
             dogFactory.Create();
-            demonFactory.Create();
+            demonFactory.Create(1);
         }
 
     #endregion

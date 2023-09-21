@@ -21,7 +21,7 @@ namespace Game.MonsterFactory.Scripts
             // use customEnemyFactory for ConCreate factory type , instead EnemyFactory
             Container.BindFactoryCustomInterface<IEnemy , CustomEnemyFactory , IEnemyFactory>().FromFactory<CustomEnemyFactory>();
             Container.BindFactory<Dog , Dog.Factory>().FromComponentInNewPrefabResource("Dog");
-            Container.BindFactory<Demon , Demon.Factory>().FromComponentInNewPrefabResource("Demon");
+            Container.BindFactory<int,Demon , Demon.Factory>().FromComponentInNewPrefabResource("Demon");
         }
 
     #endregion
