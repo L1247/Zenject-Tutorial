@@ -20,8 +20,8 @@ namespace Game.BindWithoutOptional.Scripts
 
         public void Initialize()
         {
-            Debug.Log($"{testInterface != null}");
-            Debug.Log($"{testInterface}");
+            Debug.Log($"TestInterface Exist: {testInterface != null}");
+            Debug.Log($"type: {testInterface}");
         }
 
     #endregion
