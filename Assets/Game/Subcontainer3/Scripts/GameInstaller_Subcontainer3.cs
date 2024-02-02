@@ -25,7 +25,8 @@ namespace Game.Subcontainer3.Scripts
             Container.BindFactory<float , ShipFacade , ShipFacade.Factory>()
                      .FromSubContainerResolve()
                       // .ByNewPrefabInstaller<ShipInstaller>(ShipPrefab);
-                     .ByNewPrefabResourceInstaller<ShipInstaller>("ShipPrefab");
+                      // .ByNewPrefabResourceInstaller<ShipInstaller>("ShipPrefab");
+                     .ByNewGameObjectInstaller<ShipInstaller>();
         }
 
     #endregion
