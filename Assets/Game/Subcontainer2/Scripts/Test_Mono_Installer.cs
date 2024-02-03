@@ -12,7 +12,7 @@ namespace Game.Subcontainer2.Scripts
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<Runner>().AsSingle();
+            // Container.BindInterfacesTo<Runner>().AsSingle();
             Greeter_Main_Installer.Install(Container);
         }
 
