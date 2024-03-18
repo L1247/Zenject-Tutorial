@@ -132,8 +132,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1383239156}
-  - component: {fileID: 1383239155}
   - component: {fileID: 1383239157}
+  - component: {fileID: 1383239155}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -197,9 +197,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1383239153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b20a6e71e2edffa4bb92a9eb1e1387fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c04b27e44ef420bb847404a7c5b2a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShipPrefab: {fileID: 7260336441361919303, guid: 51926ce0c98eef04ebd39f7c7381b82d, type: 3}
 --- !u!1 &1560811413
 GameObject:
   m_ObjectHideFlags: 0

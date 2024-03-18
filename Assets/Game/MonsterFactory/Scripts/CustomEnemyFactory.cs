@@ -35,12 +35,12 @@ namespace Game.MonsterFactory.Scripts
         public override IEnemy Create()
         {
             IEnemy enemy = _difficultyManager.Difficulty == Difficulties.Hard
-                    ? demonFactory.Create(1)
-                    : dogFactory.Create();
+                                   ? demonFactory.Create(1)
+                                   : dogFactory.Create();
             return enemy;
         }
 
-        public void Validate()
+        public override void Validate()
         {
             Debug.Log("Validate Factory");
             dogFactory.Create();

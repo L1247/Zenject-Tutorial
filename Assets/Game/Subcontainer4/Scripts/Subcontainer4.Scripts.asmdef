@@ -1,5 +1,5 @@
 {
-  "name": "Subcontainer3.Scripts",
+  "name": "Subcontainer4.Scripts",
   "rootNamespace": "",
   "references": [
     "Zenject"
