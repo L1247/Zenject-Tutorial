@@ -41,7 +41,6 @@ namespace Zenject.SpaceFighter
 
         public void FixedTick()
         {
-            Debug.Log("FixedTick");
             var lookDir = _view.LookDir;
 
             var error = Vector3.Angle(lookDir , DesiredLookDir);
